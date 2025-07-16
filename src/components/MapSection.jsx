@@ -105,12 +105,12 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
   };
 
   return (
-    <section className="pb-6 relative">
+    <section className="pb-4 sm:pb-6 relative px-2 sm:px-4">
       <div className="mx-auto">
-        {/* Search Bar */}
-        <div className="bg-[#213A59] p-4 rounded-lg border">
-          <div className="flex flex-col justify-center sm:flex-row gap-3">
-            <div className="relative">
+        {/* Search Bar - Mobile Responsive */}
+        <div className="bg-[#213A59] p-3 sm:p-4 rounded-lg border">
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <div className="relative flex-1 sm:flex-none">
               <input
                 type="text"
                 placeholder="What is your job?"
@@ -118,7 +118,7 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
                 onChange={handleJobInputChange}
                 onKeyPress={handleKeyPress}
                 onFocus={() => job.length > 0 && setShowJobSuggestions(true)}
-                className="w-[439px] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full sm:w-[400px] lg:w-[439px] px-3 sm:px-4 py-2 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               
               {/* Job Suggestions Dropdown */}
@@ -128,7 +128,7 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
                     <button
                       key={index}
                       onClick={() => handleSuggestionClick(suggestion, 'job')}
-                      className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors text-gray-700"
+                      className="w-full px-3 sm:px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors text-gray-700"
                     >
                       {suggestion}
                     </button>
@@ -137,7 +137,7 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
               )}
             </div>
             
-            <div className="relative">
+            <div className="relative flex-1 sm:flex-none">
               <input
                 type="text"
                 placeholder="City"
@@ -145,7 +145,7 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
                 onChange={handleCityInputChange}
                 onKeyPress={handleKeyPress}
                 onFocus={() => city.length > 0 && setShowCitySuggestions(true)}
-                className="w-[444px] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full sm:w-[400px] lg:w-[444px] px-3 sm:px-4 py-2 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               
               {/* City Suggestions Dropdown */}
@@ -155,7 +155,7 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
                     <button
                       key={index}
                       onClick={() => handleSuggestionClick(suggestion, 'city')}
-                      className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors text-gray-700"
+                      className="w-full px-3 sm:px-4 py-2 text-left text-sm hover:bg-gray-100 transition-colors text-gray-700"
                     >
                       {suggestion}
                     </button>
@@ -167,15 +167,15 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
             <button
               onClick={handleSearch}
               disabled={!job.trim() && !city.trim()}
-              className="w-36 px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full sm:w-36 px-4 sm:px-6 py-2 bg-red-600 text-white text-sm sm:text-base rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Search
             </button>
           </div>
           
-          {/* Quick search buttons */}
+          {/* Quick search buttons - Mobile responsive */}
           <div className="flex gap-2 mt-3 flex-wrap">
-            <span className="text-white text-sm">Popular:</span>
+            <span className="text-white text-xs sm:text-sm">Popular:</span>
             {['Heating Repair', 'AC Installation', 'Emergency Service', 'Duct Cleaning'].map((quickSearch) => (
               <button
                 key={quickSearch}
@@ -183,7 +183,7 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
                   setJob(quickSearch);
                   onSearch(quickSearch, city || searchFilters.city || 'Toronto');
                 }}
-                className="text-xs bg-white/20 text-white px-3 py-1 rounded-full hover:bg-white/30 transition-colors"
+                className="text-xs bg-white/20 text-white px-2 sm:px-3 py-1 rounded-full hover:bg-white/30 transition-colors"
               >
                 {quickSearch}
               </button>
@@ -191,14 +191,14 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
           </div>
         </div>
 
-        {/* Map Container */}
-        <div className="rounded-lg overflow-hidden border border-gray-300 shadow mt-4" style={{ height: '350px' }}>
+        {/* Map Container - Mobile responsive */}
+        <div className="rounded-lg overflow-hidden border border-gray-300 shadow mt-4" style={{ height: '250px' }}>
           <iframe
             title={`${job || 'HVAC Technicians'} in ${city || searchFilters.city || 'Toronto'}`}
             width="100%"
             height="100%"
             frameBorder="0"
-            style={{ border: 0, minHeight: '350px' }}
+            style={{ border: 0, minHeight: '250px' }}
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2886.510356473105!2d-79.4000496845012!3d43.66166797912109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b34d6b6b6b6b6%3A0x6b6b6b6b6b6b6b6b!2sToronto%2C%20ON!5e0!3m2!1sen!2sca!4v1681234567890!5m2!1sen!2sca"
             allowFullScreen=""
             aria-hidden="false"
@@ -206,10 +206,10 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
           ></iframe>
         </div>
         
-        {/* Search Results Summary */}
+        {/* Search Results Summary - Mobile responsive */}
         {(searchFilters.job || searchFilters.city) && (
           <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-            <p className="text-sm text-gray-700">
+            <p className="text-xs sm:text-sm text-gray-700">
               Searching for: <span className="font-medium">{searchFilters.job || 'HVAC Services'}</span> 
               {' '}in <span className="font-medium">{searchFilters.city || 'Toronto'}</span>
             </p>

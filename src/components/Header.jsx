@@ -21,29 +21,30 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
   };
 
   return (
-    <header className="bg-white border-none border-gray-200 py-2 relative">
-      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center">
+    <header className="bg-white border-none border-gray-200 py-2 px-2 sm:px-4 relative">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <div className="flex items-center flex-1 min-w-0">
           <div className="flex items-center justify-center cursor-pointer">
-            <div className="w-10 h-12 mt-1 ">
+            <div className="w-8 h-10 sm:w-10 sm:h-12 mt-1 flex-shrink-0">
               <img src={LogoIcon} alt="Logo" />
             </div>
-            <span className="text-[#213A59] font-roboto font-bold text-[30px] leading-none align-middle">
+            <span className="text-[#213A59] font-roboto font-bold text-lg sm:text-[30px] leading-none align-middle ml-2 truncate">
               Home Service Bureau
             </span>
           </div>
         </div>
-        <div className="flex items-center space-x-6">
-
-          {/* my hsb icon with location dropdown */}
+        
+        <div className="flex items-center space-x-2 sm:space-x-6 flex-shrink-0">
+          {/* Location selector with mobile optimization */}
           <div className="relative">
             <div 
-              className="flex gap-1 items-center text-gray-600 text-sm cursor-pointer hover:text-[#213A59] transition-colors"
+              className="flex gap-1 items-center text-gray-600 text-xs sm:text-sm cursor-pointer hover:text-[#213A59] transition-colors"
               onClick={() => setShowLocationDropdown(!showLocationDropdown)}
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
+                className="sm:w-5 sm:h-5 flex-shrink-0"
                 viewBox="0 0 20 20"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -54,11 +55,17 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
                 />
               </svg>
 
-              <p className="font-roboto font-normal text-[20px] leading-none align-middle">
+              <p className="font-roboto font-normal text-sm sm:text-[20px] leading-none align-middle hidden sm:block">
                 {userLocation}
               </p>
+              
+              {/* Mobile: Show just city name */}
+              <p className="font-roboto font-normal text-xs leading-none align-middle sm:hidden">
+                {userLocation.split(',')[0]}
+              </p>
+              
               <svg 
-                className={`w-4 h-4 transition-transform ${showLocationDropdown ? 'rotate-180' : ''}`} 
+                className={`w-3 h-3 sm:w-4 sm:h-4 transition-transform flex-shrink-0 ${showLocationDropdown ? 'rotate-180' : ''}`} 
                 fill="currentColor" 
                 viewBox="0 0 20 20"
               >
@@ -66,14 +73,14 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
               </svg>
             </div>
 
-            {/* Location Dropdown */}
+            {/* Location Dropdown - Mobile optimized */}
             {showLocationDropdown && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+              <div className="absolute top-full right-0 mt-2 w-44 sm:w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
                 {locations.map((location) => (
                   <button
                     key={location}
                     onClick={() => handleLocationChange(location)}
-                    className={`w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors ${
+                    className={`w-full px-3 sm:px-4 py-2 text-left text-xs sm:text-sm hover:bg-gray-100 transition-colors ${
                       userLocation === location ? 'bg-blue-50 text-[#213A59]' : 'text-gray-700'
                     }`}
                   >
@@ -84,20 +91,18 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
             )}
           </div>
 
-          {/* menu button */}
+          {/* Menu button - Mobile optimized */}
           <div className="relative">
             <div 
-              className="flex gap-2 items-center text-gray-600 text-sm cursor-pointer hover:text-black transition-colors"
+              className="flex gap-1 sm:gap-2 items-center text-gray-600 text-xs sm:text-sm cursor-pointer hover:text-black transition-colors"
               onClick={toggleMenu}
             >
-              <p className="font-roboto font-normal text-[20px] leading-none align-middle">
+              <p className="font-roboto font-normal text-sm sm:text-[20px] leading-none align-middle">
                 Menu
               </p>
 
               <svg
-                className={`transition-transform duration-200 ${isMenuOpen ? 'rotate-90' : ''}`}
-                width="30"
-                height="30"
+                className={`transition-transform duration-200 w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 ${isMenuOpen ? 'rotate-90' : ''}`}
                 viewBox="0 0 30 30"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -117,24 +122,24 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
               </svg>
             </div>
 
-            {/* Menu Dropdown */}
+            {/* Menu Dropdown - Mobile optimized */}
             {isMenuOpen && (
-              <div className="absolute top-full right-0 mt-2 w-64 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                <div className="p-4">
-                  <div className="space-y-3">
-                    <h3 className="font-semibold text-[#213A59] border-b pb-2">Services</h3>
-                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors">Find HVAC Experts</a>
-                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors">Emergency Service</a>
-                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors">Maintenance Plans</a>
+              <div className="absolute top-full right-0 mt-2 w-56 sm:w-64 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                <div className="p-3 sm:p-4">
+                  <div className="space-y-2 sm:space-y-3">
+                    <h3 className="font-semibold text-[#213A59] border-b pb-2 text-sm sm:text-base">Services</h3>
+                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">Find HVAC Experts</a>
+                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">Emergency Service</a>
+                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">Maintenance Plans</a>
                     
-                    <h3 className="font-semibold text-[#213A59] border-b pb-2 pt-3">Account</h3>
-                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors">My Account</a>
-                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors">My Bookings</a>
-                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors">Support</a>
+                    <h3 className="font-semibold text-[#213A59] border-b pb-2 pt-3 text-sm sm:text-base">Account</h3>
+                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">My Account</a>
+                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">My Bookings</a>
+                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">Support</a>
                     
-                    <h3 className="font-semibold text-[#213A59] border-b pb-2 pt-3">Company</h3>
-                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors">About Us</a>
-                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors">Contact</a>
+                    <h3 className="font-semibold text-[#213A59] border-b pb-2 pt-3 text-sm sm:text-base">Company</h3>
+                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">About Us</a>
+                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">Contact</a>
                   </div>
                 </div>
               </div>
