@@ -105,7 +105,7 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
   };
 
   return (
-    <section className="pb-4 sm:pb-6 relative px-2 sm:px-4">
+    <section className="pb-4 sm:pb-6 relative ">
       <div className="mx-auto">
         {/* Search Bar - Mobile Responsive */}
         <div className="bg-[#213A59] p-3 sm:p-4 rounded-lg border">
@@ -174,7 +174,7 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
           </div>
           
           {/* Quick search buttons - Mobile responsive */}
-          <div className="flex gap-2 mt-3 flex-wrap">
+          {/* <div className="flex gap-2 mt-3 flex-wrap">
             <span className="text-white text-xs sm:text-sm">Popular:</span>
             {['Heating Repair', 'AC Installation', 'Emergency Service', 'Duct Cleaning'].map((quickSearch) => (
               <button
@@ -188,7 +188,7 @@ const MapSection = ({ searchFilters, onSearch, updateSearchFilters }) => {
                 {quickSearch}
               </button>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* Map Container - Mobile responsive */}
