@@ -3,6 +3,7 @@ import image from '../public/image.png'
 import Agesolutions from '../public/Agesolutions.png'
 import HSBverification from '../public/HSBverification.png'
 import LogoIcon from '../public/LogoIcon1.png'
+import StarRibbon from '../public/StarRibbon.png'
 
 const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
   const [displayedTechnicians, setDisplayedTechnicians] = useState(8);
@@ -178,7 +179,8 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
 
     // Filter by minimum rating
     if (searchFilters.minRating) {
-      const minRating = searchFilters.minRating === '4+ Stars' ? 4 : 
+      const minRating = searchFilters.minRating === '4.5+ Stars' ? 4.5 :
+                       searchFilters.minRating === '4+ Stars' ? 4 : 
                        searchFilters.minRating === '3+ Stars' ? 3 : 0;
       filtered = filtered.filter(tech => tech.rating >= minRating);
     }
@@ -452,7 +454,8 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
             <select 
               value={searchFilters.sortBy || ''}
               onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-              className="border border-gray-300 rounded px-2 sm:px-3 py-1 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-[#E5E5E5] bg-[#F3F3F3] rounded-md h-[34px] px-4 py-1 text-xs sm:text-sm opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-roboto font-medium"
+            
             >
               <option value="">Sort by</option>
               <option value="Rating">Rating</option>
@@ -465,7 +468,7 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
             <select 
               value={searchFilters.category || ''}
               onChange={(e) => handleFilterChange('category', e.target.value)}
-              className="border border-gray-300 rounded px-2 sm:px-3 py-1 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-[#E5E5E5] bg-[#F3F3F3] rounded-md h-[34px] px-4 py-1 text-xs sm:text-sm opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-roboto font-medium"
             >
               <option value="">Categories</option>
               <option value="Heating">Heating</option>
@@ -477,34 +480,53 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
             </select>
           </div>
           
-          <div className="flex items-center gap-2">
-            <input 
-              type="checkbox" 
-              id="verified" 
-              checked={searchFilters.starExpertsOnly || false}
-              onChange={(e) => handleFilterChange('starExpertsOnly', e.target.checked)}
-              className="rounded" 
-            />
-            <label htmlFor="verified" className="text-xs sm:text-sm text-gray-600">Star Experts</label>
+          <div 
+            className={`flex justify-center items-center gap-2 border border-[#E5E5E5] rounded-md h-[34px] px-4 py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-roboto font-medium cursor-pointer transition-colors ${
+              searchFilters.starExpertsOnly ? 'bg-[#AF2638] text-white' : 'bg-[#F3F3F3] text-gray-600'
+            }`}
+            onClick={() => handleFilterChange('starExpertsOnly', !searchFilters.starExpertsOnly)}
+          >
+            <div className="w-4 h-4 flex items-center justify-center">
+              <img src={StarRibbon} alt="Star Experts" className="w-full h-full object-contain" />
+            </div>
+            <span className="text-xs sm:text-sm">Star Experts</span>
           </div>
           
+          <div 
+            className={`flex justify-center items-center gap-2 border border-[#E5E5E5] rounded-md h-[34px] px-4 py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-roboto font-medium cursor-pointer transition-colors ${
+              searchFilters.bureauVerifiedOnly ? 'bg-[#AF2638] text-white' : 'bg-[#F3F3F3] text-gray-600'
+            }`}
+            onClick={() => handleFilterChange('bureauVerifiedOnly', !searchFilters.bureauVerifiedOnly)}
+          >
+            <div className="w-4 h-4 flex items-center justify-center">
+              <img src={LogoIcon} alt="Bureau Verified" className="w-full h-full object-contain" />
+            </div>
+            <span className="text-xs sm:text-sm hidden sm:block">Bureau Verified Experts</span>
+            <span className="text-xs sm:text-sm sm:hidden">Verified</span>
+          </div>
+
           <div className="flex items-center gap-2">
-            <input 
-              type="checkbox" 
-              id="business-verified" 
-              checked={searchFilters.bureauVerifiedOnly || false}
-              onChange={(e) => handleFilterChange('bureauVerifiedOnly', e.target.checked)}
-              className="rounded" 
-            />
-            <label htmlFor="business-verified" className="text-xs sm:text-sm text-gray-600 hidden sm:block">Bureau Verified</label>
-            <label htmlFor="business-verified" className="text-xs sm:text-sm text-gray-600 sm:hidden">Verified</label>
+            <select 
+              value={searchFilters.minRating || ''}
+              onChange={(e) => handleFilterChange('minRating', e.target.value)}
+              className="border border-[#E5E5E5] bg-[#F3F3F3] rounded-md h-[34px] px-4 py-1 text-xs sm:text-sm opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-roboto font-medium"
+            >
+              <option value="">Rating</option>
+              <option value="4.5+ Stars">4.5+ Stars</option>
+              <option value="4+ Stars">4+ Stars</option>
+              <option value="3+ Stars">3+ Stars</option>
+            </select>
           </div>
           
           <button 
             onClick={() => setShowAllFilters(!showAllFilters)}
-            className="bg-[#AF2638] text-white px-3 sm:px-4 py-1 sm:py-2 rounded text-xs sm:text-sm font-medium hover:bg-red-700 transition-colors"
+            className="flex justify-center items-center gap-2 border border-[#E5E5E5] bg-[#F3F3F3] rounded-md h-[34px] px-4 py-2 text-xs sm:text-sm opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-roboto font-medium"
           >
-            {showAllFilters ? 'Hide' : 'More'} Filters
+            <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10.6513 3.22205C10.9447 3.22205 11.1825 3.47389 11.1825 3.78455V6.09758C11.1825 6.40824 10.9447 6.66008 10.6513 6.66008C10.3579 6.66008 10.12 6.40824 10.12 6.09758V5.47424H1.49622C1.20282 5.47424 0.964966 5.22241 0.964966 4.91174C0.964966 4.60109 1.20282 4.34924 1.49622 4.34924H10.12V3.78455C10.12 3.47389 10.3579 3.22205 10.6513 3.22205ZM16.1144 4.90629C16.1173 5.21693 15.8818 5.47121 15.5884 5.47422L12.7307 5.50356C12.4374 5.50658 12.1972 5.25719 12.1944 4.94654C12.1916 4.63589 12.4271 4.38163 12.7205 4.37861L15.5781 4.34927C15.8715 4.34626 16.1116 4.59565 16.1144 4.90629ZM6.40483 6.93584C6.69824 6.93584 6.93608 7.18768 6.93608 7.49834V8.62487V8.62614V9.81137C6.93608 10.122 6.69824 10.3739 6.40483 10.3739C6.11143 10.3739 5.87358 10.122 5.87358 9.81137V9.18804H1.49622C1.20282 9.18804 0.964966 8.93619 0.964966 8.62554C0.964966 8.31489 1.20282 8.06304 1.49622 8.06304H5.87358V7.49834C5.87358 7.18768 6.11143 6.93584 6.40483 6.93584ZM7.96868 8.62554C7.96868 8.31489 8.20654 8.06304 8.49993 8.06304H15.5833C15.8767 8.06304 16.1145 8.31489 16.1145 8.62554C16.1145 8.93619 15.8767 9.18804 15.5833 9.18804H8.49993C8.20654 9.18804 7.96868 8.93619 7.96868 8.62554ZM9.21953 11.4087C9.51292 11.4087 9.75078 11.6606 9.75078 11.9712V14.2842C9.75078 14.5949 9.51292 14.8467 9.21953 14.8467C8.92614 14.8467 8.68828 14.5949 8.68828 14.2842V13.6609H1.75161C1.45821 13.6609 1.22036 13.409 1.22036 13.0984C1.22036 12.7877 1.45821 12.5359 1.75161 12.5359H8.68828V11.9712C8.68828 11.6606 8.92614 11.4087 9.21953 11.4087ZM16.3699 13.0949C16.3717 13.4056 16.1353 13.6589 15.8419 13.6609L11.3265 13.6904C11.0331 13.6923 10.7938 13.442 10.792 13.1313C10.7902 12.8207 11.0266 12.5673 11.3199 12.5654L15.8354 12.5359C16.1288 12.534 16.3681 12.7843 16.3699 13.0949Z" fill="black"/>
+</svg>
+
+            {showAllFilters ? 'Hide' : 'All'} Filters
           </button>
         </div>
 
