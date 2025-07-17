@@ -1,9 +1,4 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import image from '../public/image.png'
-import Agesolutions from '../public/Agesolutions.png'
-import HSBverification from '../public/HSBverification.png'
-import LogoIcon from '../public/LogoIcon1.png'
-import StarRibbon from '../public/StarRibbon.png'
 
 const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
   const [displayedTechnicians, setDisplayedTechnicians] = useState(8);
@@ -252,13 +247,13 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
         <div className="flex gap-3 mb-3">
           {/* Company Logo */}
           <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-gray-100 rounded-lg">
-            <img src={Agesolutions} alt={tech.name} className="w-12 h-12 object-contain" />
+                            <img src="/Agesolutions.png" alt={tech.name} className="w-12 h-12 object-contain" />
           </div>
           
           {/* Company Image */}
           <div className="flex-1 h-16 bg-gray-200 rounded-lg overflow-hidden">
             <img 
-              src={image} 
+              src="/image.png" 
               alt={`${tech.name} workspace`}
               className="w-full h-full object-cover"
             />
@@ -267,7 +262,7 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
           {/* Verification Badge */}
           {tech.verified && (
             <div className="flex-shrink-0 w-16 h-8 flex items-center justify-center">
-              <img src={HSBverification} alt='HSB Verification' className="w-full h-full object-contain" />
+                              <img src="/HSBverification.png" alt='HSB Verification' className="w-full h-full object-contain" />
             </div>
           )}
         </div>
@@ -330,7 +325,7 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
       <div className="hidden sm:flex items-start gap-6" style={{ minHeight: '180px' }}>
         {/* Company Logo */}
         <div className="flex-shrink-0 flex items-center justify-center" style={{width: '161px', height: '155px', borderRadius: '10px'}}>
-          <img src={Agesolutions} alt={tech.name} />
+                          <img src="/Agesolutions.png" alt={tech.name} />
         </div>
         
         <div className="flex-1">
@@ -353,7 +348,7 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
             {/* Verification Badge */}
             {tech.verified && (
               <div className="w-24 h-8" style={{ width: '99.3846206665039px', height: '34px' }}>
-                <img src={HSBverification} alt='HSB Verification' />
+                <img src="/HSBverification.png" alt='HSB Verification' />
               </div>
             )}
           </div>
@@ -402,7 +397,7 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
         {/* Company Image */}
         <div className="bg-gray-200 flex-shrink-0 ml-4 overflow-hidden" style={{width: '244px', height: '161px', borderRadius: '10px'}}>
           <img 
-            src={image} 
+            src="/image.png" 
             alt={`${tech.name} workspace`}
             className="w-full h-full object-cover"
           />
@@ -487,7 +482,7 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
             onClick={() => handleFilterChange('starExpertsOnly', !searchFilters.starExpertsOnly)}
           >
             <div className="w-4 h-4 flex items-center justify-center">
-              <img src={StarRibbon} alt="Star Experts" className="w-full h-full object-contain" />
+              <img src="/StarRibbon.png" alt="Star Experts" className="w-full h-full object-contain" />
             </div>
             <span className="text-xs sm:text-sm">Star Experts</span>
           </div>
@@ -499,7 +494,7 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
             onClick={() => handleFilterChange('bureauVerifiedOnly', !searchFilters.bureauVerifiedOnly)}
           >
             <div className="w-4 h-4 flex items-center justify-center">
-              <img src={LogoIcon} alt="Bureau Verified" className="w-full h-full object-contain" />
+              <img src="/LogoIcon1.png" alt="Bureau Verified" className="w-full h-full object-contain" />
             </div>
             <span className="text-xs sm:text-sm hidden sm:block">Bureau Verified Experts</span>
             <span className="text-xs sm:text-sm sm:hidden">Verified</span>
@@ -592,7 +587,7 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
         {recommendedTechnicians.length > 0 && (
           <div className="flex items-center gap-2 mb-3 sm:mb-4">
             <div className="w-6 h-8 sm:w-8 sm:h-10">
-              <img src={LogoIcon} alt='logoicon' />
+              <img src="/LogoIcon1.png" alt='logoicon' />
             </div>
             <span className="font-['Roboto'] font-medium text-lg sm:text-[30px] leading-[100%] align-middle text-[#213A59]">
               Recommended Experts Near You
@@ -615,9 +610,9 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
         {otherTechnicians.length > 0 && (
           <>
             <div className="flex items-center gap-2 mb-3 sm:mb-4">
-              <div className="w-6 h-8 sm:w-8 sm:h-10">
-                <img src={LogoIcon} alt='logoicon' />
-              </div>
+                          <div className="w-6 h-8 sm:w-8 sm:h-10">
+              <img src="/LogoIcon1.png" alt='logoicon' />
+            </div>
               <span className="font-['Roboto'] font-medium text-lg sm:text-[30px] leading-[100%] align-middle text-[#213A59]">
                 Other Experts Near You
               </span>

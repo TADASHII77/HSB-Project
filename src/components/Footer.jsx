@@ -1,10 +1,9 @@
 import React from 'react';
-import Logo from '../public/LogoIcon1.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#213A59] text-white pt-8 mt-auto">
-      <div className="max-w-7xl mx-auto px-4">
+    <footer className="bg-[#213A59] text-white pt-8  mt-auto">
+      <div className="max-w-7xl mx-auto mb-8 px-4">
       <h4 className="mb-4 text-white font-roboto font-bold text-[30px]">Home Service Bureau</h4>
 
         <div className="grid grid-cols-3 gap-8 text-sm">
@@ -74,7 +73,7 @@ const Footer = () => {
           </div>
           
           <div className="flex items-center">
-            <img src={Logo} alt="Logo" className="w-8 h-8 mr-2" />
+                          <img src="/LogoIcon1.png" alt="Logo" className="w-8 h-8 mr-2" />
             <span className="font-roboto font-bold text-2xl mr-2 text-[#213A59]" >Home Service Bureau</span>
            
           </div>

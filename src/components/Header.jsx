@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import LogoIcon from '../public/LogoIcon1.png'
 
 const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
@@ -26,7 +25,7 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
         <div className="flex items-center flex-1 min-w-0">
           <div className="flex items-center justify-center cursor-pointer">
             <div className="w-8 h-10 sm:w-10 sm:h-12 mt-1 flex-shrink-0">
-              <img src={LogoIcon} alt="Logo" />
+              <img src="/LogoIcon1.png" alt="Logo" />
             </div>
             <span className="text-[#213A59] font-roboto font-bold text-lg sm:text-[30px] leading-none align-middle ml-2 truncate">
               Home Service Bureau
