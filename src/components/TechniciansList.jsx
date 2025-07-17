@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
+  const navigate = useNavigate();
   const [displayedTechnicians, setDisplayedTechnicians] = useState(8);
   const [selectedQuotes, setSelectedQuotes] = useState(new Set());
   const [showAllFilters, setShowAllFilters] = useState(false);
@@ -221,6 +223,10 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
     console.log('Quote requested for technician:', technicianId);
   };
 
+  const handleTechnicianClick = (technicianId) => {
+    navigate(`/technician/${technicianId}`);
+  };
+
   const loadMoreTechnicians = () => {
     setDisplayedTechnicians(prev => Math.min(prev + 4, filteredTechnicians.length));
   };
@@ -240,46 +246,37 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
   };
 
   const TechnicianCard = ({ tech, isRecommended = false }) => (
-    <div className="border border-black border-opacity-40 rounded-[15px] p-3 sm:p-4 mb-4 bg-white">
+    <div 
+      className="border border-black border-opacity-40 rounded-[15px] p-3 sm:p-4 mb-4 bg-white cursor-pointer hover:shadow-lg transition-shadow duration-200"
+      onClick={() => handleTechnicianClick(tech.id)}
+    >
       {/* Mobile Layout */}
       <div className="block sm:hidden">
-        {/* Company Info and Image Row */}
-        <div className="flex gap-3 mb-3">
+        {/* Top Section - Logo, Text, and Verification Badge */}
+        <div className="flex items-start gap-3 mb-3">
           {/* Company Logo */}
           <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-gray-100 rounded-lg">
-                            <img src="/Agesolutions.png" alt={tech.name} className="w-12 h-12 object-contain" />
+            <img src="/Agesolutions.png" alt={tech.name} className="w-12 h-12 object-contain" />
           </div>
           
-          {/* Company Image */}
-          <div className="flex-1 h-16 bg-gray-200 rounded-lg overflow-hidden">
-            <img 
-              src="/image.png" 
-              alt={`${tech.name} workspace`}
-              className="w-full h-full object-cover"
-            />
+          {/* Company Name and Rating */}
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold text-gray-900 mb-1 leading-tight">
+              {tech.name}
+            </h3>
+            <div className="flex items-center gap-2 mb-2">
+              {renderStars(tech.rating)}
+              <span className="text-sm font-medium text-gray-900">{tech.rating}</span>
+              <span className="text-sm text-gray-600">({tech.reviews} Reviews)</span>
+            </div>
           </div>
           
           {/* Verification Badge */}
           {tech.verified && (
             <div className="flex-shrink-0 w-16 h-8 flex items-center justify-center">
-                              <img src="/HSBverification.png" alt='HSB Verification' className="w-full h-full object-contain" />
+              <img src="/HSBverification.png" alt='HSB Verification' className="w-full h-full object-contain" />
             </div>
           )}
-        </div>
-        
-        {/* Company Name and Rating */}
-        <div className="mb-2">
-          <h3 className="text-lg font-semibold text-gray-900 mb-1 leading-tight">
-            {tech.name}
-          </h3>
-          <div className="flex items-center gap-2 mb-2">
-            {renderStars(tech.rating)}
-            <span className="text-sm font-medium text-gray-900">{tech.rating}</span>
-            <span className="text-sm text-gray-600">({tech.reviews} Reviews)</span>
-            {tech.emergency && (
-              <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">24/7</span>
-            )}
-          </div>
         </div>
         
         {/* Distance and Address */}
@@ -287,43 +284,60 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
           <p>{tech.distance}km away • {tech.address}</p>
         </div>
         
-        {/* Services */}
-        <div className="flex flex-wrap gap-2 mb-3">
-          {tech.services.map((service, index) => (
-            <span key={index} className="text-xs bg-[#F3F3F3] rounded px-2 py-1 text-gray-600">
-              {service}
-            </span>
-          ))}
-        </div>
+        {/* Emergency Badge */}
+        {tech.emergency && (
+          <div className="mb-3">
+            <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">24/7</span>
+          </div>
+        )}
         
-        {/* Action Button */}
-        <button 
-          onClick={() => handleQuoteRequest(tech.id)}
-          className={`w-full h-10 flex items-center justify-center gap-2 font-semibold rounded-md shadow transition-colors duration-200 text-sm ${
-            selectedQuotes.has(tech.id) 
-              ? 'bg-green-600 text-white hover:bg-green-700' 
-              : 'bg-[#AF2638] text-white hover:bg-red-700'
-          }`}
-        >
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#clip0_39_695)">
-              <path d="M12.041 0.257324V2.9297H14.7132L12.041 0.257324Z" fill="white"/>
-              <path d="M11.6016 3.80859C11.3589 3.80859 11.1621 3.61184 11.1621 3.36914V0H4.86328C4.13634 0 3.54492 0.591416 3.54492 1.31836V6.23112C3.68971 6.218 3.83622 6.21094 3.98438 6.21094C5.48227 6.21094 6.82315 6.89578 7.71053 7.96875H12.4805C12.7232 7.96875 12.9199 8.16551 12.9199 8.4082C12.9199 8.6509 12.7232 8.84766 12.4805 8.84766H8.28949C8.56418 9.38367 8.74131 9.97749 8.79817 10.6055H12.4805C12.7232 10.6055 12.9199 10.8022 12.9199 11.0449C12.9199 11.2876 12.7232 11.4844 12.4805 11.4844H8.79817C8.66675 12.9357 7.89132 14.2039 6.76049 15H13.6523C14.3793 15 14.9707 14.4086 14.9707 13.6816V3.80859H11.6016ZM12.4805 6.21094H6.03516C5.79246 6.21094 5.5957 6.01418 5.5957 5.77148C5.5957 5.52879 5.79246 5.33203 6.03516 5.33203H12.4805C12.7232 5.33203 12.9199 5.52879 12.9199 5.77148C12.9199 6.01418 12.7232 6.21094 12.4805 6.21094Z" fill="white"/>
-              <path d="M3.98438 7.08984C1.80354 7.08984 0.0292969 8.86409 0.0292969 11.0449C0.0292969 13.2258 1.80354 15 3.98438 15C6.16521 15 7.93945 13.2258 7.93945 11.0449C7.93945 8.86409 6.16521 7.08984 3.98438 7.08984ZM3.74024 10.6055H4.22854C4.74006 10.6055 5.15625 11.0217 5.15625 11.5332V12.0215C5.15625 12.466 4.84189 12.8384 4.42383 12.9284V13.0957C4.42383 13.3384 4.22707 13.5352 3.98438 13.5352C3.74168 13.5352 3.54492 13.3384 3.54492 13.0957V12.9284C3.12686 12.8384 2.8125 12.466 2.8125 12.0215C2.8125 11.7788 3.00926 11.582 3.25195 11.582C3.49465 11.582 3.69141 11.7788 3.69141 12.0215C3.69141 12.0484 3.71332 12.0703 3.74024 12.0703H4.22854C4.25546 12.0703 4.27737 12.0484 4.27737 12.0215V11.5332C4.27737 11.5063 4.25546 11.4844 4.22854 11.4844H3.74024C3.22869 11.4844 2.8125 11.0682 2.8125 10.5566V10.0684C2.8125 9.62382 3.12686 9.25146 3.54492 9.16148V8.99414C3.54492 8.75145 3.74168 8.55469 3.98438 8.55469C4.22707 8.55469 4.42383 8.75145 4.42383 8.99414V9.16148C4.84189 9.25146 5.15625 9.62382 5.15625 10.0684C5.15625 10.3111 4.95949 10.5078 4.7168 10.5078C4.4741 10.5078 4.27734 10.3111 4.27734 10.0684C4.27734 10.0414 4.25543 10.0195 4.22851 10.0195H3.74021C3.71329 10.0195 3.69138 10.0414 3.69138 10.0684V10.5566C3.69141 10.5836 3.71332 10.6055 3.74024 10.6055Z" fill="white"/>
-            </g>
-            <defs>
-              <clipPath id="clip0_39_695">
-                <rect width="15" height="15" fill="white"/>
-              </clipPath>
-            </defs>
-          </svg>
-          {selectedQuotes.has(tech.id) ? 'Quote Requested' : 'Get a free Quote'}
-        </button>
+        {/* Action Buttons */}
+        <div className="flex gap-2 mb-3">
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              // Handle call functionality here
+            }}
+            className="flex-1 bg-green-600 text-white py-2 px-4 rounded-md text-sm font-medium flex items-center justify-center gap-2"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" fill="currentColor"/>
+            </svg>
+            Call Now
+          </button>
+          
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              handleQuoteRequest(tech.id);
+            }}
+            className={`flex-1 py-2 px-4 rounded-md text-sm font-medium flex items-center justify-center gap-2 ${
+              selectedQuotes.has(tech.id) 
+                ? 'bg-green-600 text-white' 
+                : 'bg-[#AF2638] text-white'
+            }`}
+          >
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clipPath="url(#clip0_39_695)">
+                <path d="M12.041 0.257324V2.9297H14.7132L12.041 0.257324Z" fill="white"/>
+                <path d="M11.6016 3.80859C11.3589 3.80859 11.1621 3.61184 11.1621 3.36914V0H4.86328C4.13634 0 3.54492 0.591416 3.54492 1.31836V6.23112C3.68971 6.218 3.83622 6.21094 3.98438 6.21094C5.48227 6.21094 6.82315 6.89578 7.71053 7.96875H12.4805C12.7232 7.96875 12.9199 8.16551 12.9199 8.4082C12.9199 8.6509 12.7232 8.84766 12.4805 8.84766H8.28949C8.56418 9.38367 8.74131 9.97749 8.79817 10.6055H12.4805C12.7232 10.6055 12.9199 10.8022 12.9199 11.0449C12.9199 11.2876 12.7232 11.4844 12.4805 11.4844H8.79817C8.66675 12.9357 7.89132 14.2039 6.76049 15H13.6523C14.3793 15 14.9707 14.4086 14.9707 13.6816V3.80859H11.6016ZM12.4805 6.21094H6.03516C5.79246 6.21094 5.5957 6.01418 5.5957 5.77148C5.5957 5.52879 5.79246 5.33203 6.03516 5.33203H12.4805C12.7232 5.33203 12.9199 5.52879 12.9199 5.77148C12.9199 6.01418 12.7232 6.21094 12.4805 6.21094Z" fill="white"/>
+                <path d="M3.98438 7.08984C1.80354 7.08984 0.0292969 8.86409 0.0292969 11.0449C0.0292969 13.2258 1.80354 15 3.98438 15C6.16521 15 7.93945 13.2258 7.93945 11.0449C7.93945 8.86409 6.16521 7.08984 3.98438 7.08984ZM3.74024 10.6055H4.22854C4.74006 10.6055 5.15625 11.0217 5.15625 11.5332V12.0215C5.15625 12.466 4.84189 12.8384 4.42383 12.9284V13.0957C4.42383 13.3384 4.22707 13.5352 3.98438 13.5352C3.74168 13.5352 3.54492 13.3384 3.54492 13.0957V12.9284C3.12686 12.8384 2.8125 12.466 2.8125 12.0215C2.8125 11.7788 3.00926 11.582 3.25195 11.582C3.49465 11.582 3.69141 11.7788 3.69141 12.0215C3.69141 12.0484 3.71332 12.0703 3.74024 12.0703H4.22854C4.25546 12.0703 4.27737 12.0484 4.27737 12.0215V11.5332C4.27737 11.5063 4.25546 11.4844 4.22854 11.4844H3.74024C3.22869 11.4844 2.8125 11.0682 2.8125 10.5566V10.0684C2.8125 9.62382 3.12686 9.25146 3.54492 9.16148V8.99414C3.54492 8.75145 3.74168 8.55469 3.98438 8.55469C4.22707 8.55469 4.42383 8.75145 4.42383 8.99414V9.16148C4.84189 9.25146 5.15625 9.62382 5.15625 10.0684C5.15625 10.3111 4.95949 10.5078 4.7168 10.5078C4.4741 10.5078 4.27734 10.3111 4.27734 10.0684C4.27734 10.0414 4.25543 10.0195 4.22851 10.0195H3.74021C3.71329 10.0195 3.69138 10.0414 3.69138 10.0684V10.5566C3.69141 10.5836 3.71332 10.6055 3.74024 10.6055Z" fill="white"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_39_695">
+                  <rect width="15" height="15" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+            {selectedQuotes.has(tech.id) ? 'Quote Requested' : 'Get a Free Quote'}
+          </button>
+        </div>
       </div>
 
       {/* Desktop Layout */}
       <div className="hidden sm:flex items-start gap-6" style={{ minHeight: '180px' }}>
         {/* Company Logo */}
+        <div className="flex  gap-6 w-full">
         <div className="flex-shrink-0 flex items-center justify-center" style={{width: '161px', height: '155px', borderRadius: '10px'}}>
                           <img src="/Agesolutions.png" alt={tech.name} />
         </div>
@@ -370,7 +384,10 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
           {/* Action Buttons */}
           <div className="flex gap-3">
             <button 
-              onClick={() => handleQuoteRequest(tech.id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleQuoteRequest(tech.id);
+              }}
               className={`w-52 h-10 flex items-center justify-center gap-2 font-semibold rounded-md shadow transition-colors duration-200 ${
                 selectedQuotes.has(tech.id) 
                   ? 'bg-green-600 text-white hover:bg-green-700' 
@@ -392,6 +409,7 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
               {selectedQuotes.has(tech.id) ? 'Quote Requested' : 'Get a free Quote'}
             </button>
           </div>
+        </div>
         </div>
         
         {/* Company Image */}
@@ -675,4 +693,4 @@ const TechniciansList = ({ searchFilters, updateSearchFilters }) => {
   );
 };
 
-export default TechniciansList; 
+export default TechniciansList;

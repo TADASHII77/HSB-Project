@@ -22,7 +22,30 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
   return (
     <header className="bg-white border-none border-gray-200 py-2 px-2 sm:px-4 relative">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <div className="flex items-center flex-1 min-w-0">
+        {/* Mobile: Location with My HSB */}
+        <div className="flex items-center sm:hidden">
+          <div 
+            className="flex items-center gap-1 text-gray-600 text-xs cursor-pointer hover:text-[#213A59] transition-colors"
+            onClick={() => setShowLocationDropdown(!showLocationDropdown)}
+          >
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.99999 0C6.32405 0 3.33331 2.99074 3.33331 6.66668C3.33331 7.7702 3.60921 8.86434 4.1337 9.8348L9.63542 19.7852C9.70866 19.9178 9.84823 20 9.99999 20C10.1518 20 10.2913 19.9178 10.3646 19.7852L15.8683 9.83152C16.3908 8.86434 16.6667 7.77016 16.6667 6.66664C16.6667 2.99074 13.6759 0 9.99999 0ZM9.99999 10C8.16202 10 6.66667 8.50465 6.66667 6.66668C6.66667 4.82871 8.16202 3.33336 9.99999 3.33336C11.838 3.33336 13.3333 4.82871 13.3333 6.66668C13.3333 8.50465 11.838 10 9.99999 10Z"
+                fill="currentColor"
+              />
+            </svg>
+            <span className="font-roboto font-normal text-xs">My HSB</span>
+          </div>
+        </div>
+
+        {/* Desktop: Logo */}
+        <div className="hidden sm:flex items-center flex-1 min-w-0">
           <div className="flex items-center justify-center cursor-pointer">
             <div className="w-8 h-10 sm:w-10 sm:h-12 mt-1 flex-shrink-0">
               <img src="/LogoIcon1.png" alt="Logo" />
@@ -32,10 +55,17 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
             </span>
           </div>
         </div>
+
+        {/* Mobile: Center Logo */}
+        <div className="flex sm:hidden items-center justify-center flex-1">
+          <div className="w-8 h-10 flex-shrink-0">
+            <img src="/LogoIcon1.png" alt="Logo" />
+          </div>
+        </div>
         
         <div className="flex items-center space-x-2 sm:space-x-6 flex-shrink-0">
-          {/* Location selector with mobile optimization */}
-          <div className="relative">
+          {/* Desktop Location selector */}
+          <div className="relative hidden sm:block">
             <div 
               className="flex gap-1 items-center text-gray-600 text-xs sm:text-sm cursor-pointer hover:text-[#213A59] transition-colors"
               onClick={() => setShowLocationDropdown(!showLocationDropdown)}
@@ -54,13 +84,8 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
                 />
               </svg>
 
-              <p className="font-roboto font-normal text-sm sm:text-[20px] leading-none align-middle hidden sm:block">
+              <p className="font-roboto font-normal text-sm sm:text-[20px] leading-none align-middle">
                 {userLocation}
-              </p>
-              
-              {/* Mobile: Show just city name */}
-              <p className="font-roboto font-normal text-xs leading-none align-middle sm:hidden">
-                {userLocation.split(',')[0]}
               </p>
               
               <svg 
@@ -72,7 +97,7 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
               </svg>
             </div>
 
-            {/* Location Dropdown - Mobile optimized */}
+            {/* Location Dropdown */}
             {showLocationDropdown && (
               <div className="absolute top-full right-0 mt-2 w-44 sm:w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
                 {locations.map((location) => (
@@ -90,18 +115,18 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
             )}
           </div>
 
-          {/* Menu button - Mobile optimized */}
+          {/* Menu button */}
           <div className="relative">
             <div 
               className="flex gap-1 sm:gap-2 items-center text-gray-600 text-xs sm:text-sm cursor-pointer hover:text-black transition-colors"
               onClick={toggleMenu}
             >
-              <p className="font-roboto font-normal text-sm sm:text-[20px] leading-none align-middle">
+              <p className="font-roboto font-normal text-sm sm:text-[20px] leading-none align-middle hidden sm:block">
                 Menu
               </p>
 
               <svg
-                className={`transition-transform duration-200 w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 ${isMenuOpen ? 'rotate-90' : ''}`}
+                className={`transition-transform duration-200 w-5 h-5 sm:w-8 sm:h-8 flex-shrink-0 ${isMenuOpen ? 'rotate-90' : ''}`}
                 viewBox="0 0 30 30"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +146,7 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
               </svg>
             </div>
 
-            {/* Menu Dropdown - Mobile optimized */}
+            {/* Menu Dropdown */}
             {isMenuOpen && (
               <div className="absolute top-full right-0 mt-2 w-56 sm:w-64 bg-white border border-gray-200 rounded-md shadow-lg z-50">
                 <div className="p-3 sm:p-4">
@@ -146,6 +171,23 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Location Dropdown */}
+      {showLocationDropdown && (
+        <div className="sm:hidden absolute top-full left-2 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
+          {locations.map((location) => (
+            <button
+              key={location}
+              onClick={() => handleLocationChange(location)}
+              className={`w-full px-3 py-2 text-left text-xs hover:bg-gray-100 transition-colors ${
+                userLocation === location ? 'bg-blue-50 text-[#213A59]' : 'text-gray-700'
+              }`}
+            >
+              {location}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Overlay to close dropdowns when clicking outside */}
       {(isMenuOpen || showLocationDropdown) && (

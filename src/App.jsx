@@ -1,8 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import MapSection from './components/MapSection.jsx';
 import TechniciansList from './components/TechniciansList.jsx';
+import TechnicianReview from './components/TechnicianReview.jsx';
 import Footer from './components/Footer.jsx';
+
+// Home component that contains the main page layout
+const Home = ({ searchFilters, updateSearchFilters, handleSearch, isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
+  return (
+    <>
+      <MapSection 
+        searchFilters={searchFilters}
+        onSearch={handleSearch}
+        updateSearchFilters={updateSearchFilters}
+      />
+      <TechniciansList 
+        searchFilters={searchFilters}
+        updateSearchFilters={updateSearchFilters}
+      />
+    </>
+  );
+};
 
 function App() {
   // Global search state
@@ -38,25 +57,37 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header 
-        isMenuOpen={isMenuOpen}
-        toggleMenu={toggleMenu}
-        userLocation={userLocation}
-        setUserLocation={setUserLocation}
-      />
-      <MapSection 
-        searchFilters={searchFilters}
-        onSearch={handleSearch}
-        updateSearchFilters={updateSearchFilters}
-      />
-      <TechniciansList 
-        searchFilters={searchFilters}
-        updateSearchFilters={updateSearchFilters}
-      />
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen flex flex-col">
+        <Header 
+          isMenuOpen={isMenuOpen}
+          toggleMenu={toggleMenu}
+          userLocation={userLocation}
+          setUserLocation={setUserLocation}
+        />
+        
+        <Routes>
+          <Route 
+            path="/" 
+            element={
+              <Home 
+                searchFilters={searchFilters}
+                updateSearchFilters={updateSearchFilters}
+                handleSearch={handleSearch}
+                isMenuOpen={isMenuOpen}
+                toggleMenu={toggleMenu}
+                userLocation={userLocation}
+                setUserLocation={setUserLocation}
+              />
+            } 
+          />
+          <Route path="/technician/:id" element={<TechnicianReview />} />
+        </Routes>
+        
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
-export default App; 
+export default App;
