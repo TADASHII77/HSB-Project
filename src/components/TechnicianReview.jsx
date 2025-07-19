@@ -1,50 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const TechnicianReview = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('Profile');
+  const [showContactModal, setShowContactModal] = useState(false);
 
-  // Sample technician data (in a real app, this would come from an API or state management)
+  // Sample technician data
   const techniciansData = {
     1: {
       id: 1,
-      name: "All Comfort Energy Solutions",
-      rating: 4.8,
-      reviews: 127,
-      services: ["Heating", "Cooling", "Ventilation"],
+      name: "All Green Energy Solutions",
+      rating: 4.7,
+      reviews: 500,
+      services: ["HVAC contractor", "General contractor", "Window Contractor"],
       verified: true,
       emergency: true,
       distance: 2.3,
       category: "Heating",
-      address: "9400 ON-27, Vaughan, ON L4H 0J2",
-      phone: "(416) 555-0101"
-    },
-    2: {
-      id: 2,
-      name: "Toronto HVAC Experts",
-      rating: 4.9,
-      reviews: 89,
-      services: ["AC Repair", "Furnace Service", "Duct Cleaning"],
-      verified: true,
-      emergency: false,
-      distance: 1.8,
-      category: "Cooling",
-      address: "123 King St, Toronto, ON M5H 1A1",
-      phone: "(416) 555-0102"
-    },
-    3: {
-      id: 3,
-      name: "Climate Control Masters",
-      rating: 4.7,
-      reviews: 156,
-      services: ["Installation", "Maintenance", "Emergency Repair"],
-      verified: true,
-      emergency: true,
-      distance: 3.1,
-      category: "Installation",
-      address: "456 Queen St, Toronto, ON M4C 1N4",
-      phone: "(416) 555-0103"
+      address: "7500 ON-27, Vaughan, ON L4H 0J2",
+      phone: "+1 833-475-0705",
+      website: "www.allgreenenergysolutions.com",
+      description: "All Green Energy Solutions Net Zero is a energy y affordability solution provider in Ontario that provides innovative sustainable solutions to create a greener future. We specialize in building energy-efficient green homes and other projects that prioritize energy conservation, resource efficiency, and a reduced environmental footprint.",
+      serviceAreas: "Toronto, Ontario; Vaughan, Ontario; Mississauga, Ontario",
+      expertise: "HVAC contractor, General contractor, Window Contractor, Kitchen Renovation Company, Handyman, Landscaping Company, Carpenter, Plumber, Tiler, Architect, Bathroom Renovation Company, Demolition company, Mason, Cabinet maker, Metal worker, Pool company, Interior designer, Interior decorator, Concrete Specialist, Garage Specialist, Condominium/Apartment Specialist"
     }
   };
 
@@ -53,70 +33,33 @@ const TechnicianReview = () => {
     1: [
       {
         id: 1,
-        customerName: "Sarah Johnson",
-        rating: 5,
+        customerName: "User Full Name",
+        rating: 4,
         date: "2024-01-15",
-        service: "Furnace Repair",
-        comment: "Excellent service! The technician arrived on time and fixed our heating issue quickly. Very professional and knowledgeable.",
-        verified: true
+        service: "HVAC Service",
+        comment: "I don't tend to write many reviews, however, I am extremely happy with the service from RCC Waterproofing. I have been working with many contractors while renovating my house, and have endured many ups and downs. However, with RCC, I had absolutely no issues. The consultant Jamie was great, Anthony Jr's crew was exceptional and Rita from the office was very congenial and professional. The crew did a great job, and cleaned up nicely. They were very courteous to the neighbors on either side of us, including the builder who is renovating next door. What a nice break after dealing with a variety of contractors.",
+        verified: true,
+        reviewCount: 4
       },
       {
         id: 2,
-        customerName: "Mike Chen",
+        customerName: "User Full Name",
         rating: 4,
         date: "2024-01-10",
-        service: "AC Installation",
-        comment: "Great work installing our new air conditioning system. Clean installation and good explanation of the system.",
-        verified: true
+        service: "Installation",
+        comment: "I don't tend to write many reviews, however, I am extremely happy with the service from RCC Waterproofing. I have been working with many contractors while renovating my house, and have endured many ups and downs. However, with RCC, I had absolutely no issues. The consultant Jamie was great, Anthony Jr's crew was exceptional and Rita from the office was very congenial and professional. The crew did a great job, and cleaned up nicely. They were very courteous to the neighbors on either side of us, including the builder who is renovating next door. What a nice break after dealing with a variety of contractors.",
+        verified: true,
+        reviewCount: 4
       },
       {
         id: 3,
-        customerName: "Emily Davis",
-        rating: 5,
+        customerName: "User Full Name",
+        rating: 4,
         date: "2024-01-05",
-        service: "Emergency Repair",
-        comment: "Called for emergency heating repair on a weekend. They came out quickly and got our heat working again. Highly recommend!",
-        verified: true
-      }
-    ],
-    2: [
-      {
-        id: 4,
-        customerName: "Robert Wilson",
-        rating: 5,
-        date: "2024-01-12",
-        service: "Duct Cleaning",
-        comment: "Thorough duct cleaning service. The team was professional and left everything clean. Noticed improved air quality immediately.",
-        verified: true
-      },
-      {
-        id: 5,
-        customerName: "Lisa Thompson",
-        rating: 4,
-        date: "2024-01-08",
-        service: "Furnace Service",
-        comment: "Good maintenance service. Technician was knowledgeable and explained what needed to be done.",
-        verified: true
-      }
-    ],
-    3: [
-      {
-        id: 6,
-        customerName: "David Brown",
-        rating: 5,
-        date: "2024-01-14",
-        service: "HVAC Installation",
-        comment: "Outstanding installation service. The team was professional, efficient, and cleaned up after themselves. Very satisfied!",
-        verified: true
-      },
-      {
-        id: 7,
-        customerName: "Jennifer Lee",
-        rating: 4,
-        date: "2024-01-09",
         service: "Maintenance",
-        comment: "Regular maintenance service was thorough. Good value for money and professional service.",
-        verified: true
+        comment: "I don't tend to write many reviews, however, I am extremely happy with the service from RCC Waterproofing. I have been working with many contractors while renovating my house, and have endured many ups and downs. However, with RCC, I had absolutely no issues. The consultant Jamie was great, Anthony Jr's crew was exceptional and Rita from the office was very congenial and professional. The crew did a great job, and cleaned up nicely. They were very courteous to the neighbors on either side of us, including the builder who is renovating next door. What a nice break after dealing with a variety of contractors.",
+        verified: true,
+        reviewCount: 4
       }
     ]
   };
@@ -140,169 +83,537 @@ const TechnicianReview = () => {
     );
   }
 
-  const renderStars = (rating) => {
+  const renderStars = (rating, size = "text-base") => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
     const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
     return (
-      <div className="flex text-yellow-400 text-sm">
-        {'★'.repeat(fullStars)}
-        {hasHalfStar && '☆'}
-        {'☆'.repeat(emptyStars)}
+      <div className={`flex ${size} text-yellow-400`}>
+        {Array.from({ length: fullStars }, (_, i) => (
+          <span key={i}>★</span>
+        ))}
+        {hasHalfStar && <span>☆</span>}
+        {Array.from({ length: emptyStars }, (_, i) => (
+          <span key={i} className="text-gray-300">☆</span>
+        ))}
       </div>
     );
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <button 
-            onClick={() => navigate('/')}
-            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors mb-4"
-          >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Search Results
-          </button>
-          
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="flex-shrink-0">
-              <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center">
-                <img src="/Agesolutions.png" alt={technician.name} className="w-16 h-16 object-contain" />
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'Profile':
+        return (
+          <div className="space-y-6 md:space-y-8">
+            {/* Good to know section */}
+            <div>
+              <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-black">Good to know</h3>
+              <div className="space-y-3 md:space-y-4">
+                <div className="flex items-center">
+                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-lg text-black">Verified by Home Service Bureau</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <span className="text-sm md:text-lg text-black">Offers warranty</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <span className="text-sm md:text-lg text-black">Trusted expert in your area</span>
+                </div>
               </div>
             </div>
             
-            <div className="flex-1">
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{technician.name}</h1>
-              <div className="flex items-center gap-4 mb-2">
-                {renderStars(technician.rating)}
-                <span className="text-lg font-medium text-gray-900">{technician.rating}</span>
-                <span className="text-gray-600">({technician.reviews} Reviews)</span>
-                {technician.verified && (
-                  <div className="w-16 h-6">
-                    <img src="/HSBverification.png" alt='HSB Verification' className="w-full h-full object-contain" />
-                  </div>
-                )}
+            {/* Expert In section */}
+            <div>
+              <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-black">Expert In</h3>
+              <p className="text-sm md:text-lg text-black leading-relaxed">
+                {technician.expertise}
+              </p>
+            </div>
+            
+            {/* About this company section */}
+            <div>
+              <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-black">About this company</h3>
+              <p className="text-sm md:text-lg text-black leading-relaxed mb-4 md:mb-6">
+                {technician.description}
+              </p>
+              <div>
+                <h4 className="text-base md:text-lg font-semibold mb-2 md:mb-3 text-black">Service Areas:</h4>
+                <p className="text-sm md:text-lg text-black">
+                  {technician.serviceAreas}
+                </p>
               </div>
-              
-              <div className="flex flex-wrap gap-2 mb-3">
-                {technician.services.map((service, index) => (
-                  <span key={index} className="text-sm bg-gray-100 rounded px-2 py-1 text-gray-600">
-                    {service}
-                  </span>
+            </div>
+
+            {/* Portfolio section */}
+            <div>
+              <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-black">Portfolio</h3>
+              <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4">
+                {Array.from({ length: activeTab === 'Portfolio' ? 15 : 3 }, (_, i) => (
+                  <div key={i} className="aspect-[3/2] bg-gray-200 rounded-lg overflow-hidden">
+                    <img 
+                      src="/portfolio-1.png" 
+                      alt={`Portfolio ${i + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 ))}
               </div>
-              
-              <div className="text-gray-600">
-                <p>{technician.distance}km away • {technician.address}</p>
-                <p className="mt-1">{technician.phone}</p>
+              {activeTab === 'Profile' && (
+                <div className="md:hidden flex justify-center mt-4">
+                  <div className="flex space-x-2">
+                    <button className="w-5 h-5 bg-gray-800 text-white rounded text-xs flex items-center justify-center">1</button>
+                    <button className="w-5 h-5 bg-gray-300 text-black rounded text-xs flex items-center justify-center">2</button>
+                    <button className="w-5 h-5 bg-gray-300 text-black rounded text-xs flex items-center justify-center">3</button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Contact Information section */}
+            <div>
+              <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-black">Contact Information</h3>
+              <div className="space-y-3 md:space-y-4">
+                <div className="flex items-center">
+                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                  </svg>
+                  <span className="text-sm md:text-lg text-black">{technician.phone}</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.559-.499-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.559.499.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.497-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.148.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.032 11H4.083a6.004 6.004 0 002.851 4.118z" clipRule="evenodd"/>
+                  </svg>
+                  <span className="text-sm md:text-lg text-black">{technician.website}</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
+                  </svg>
+                  <span className="text-sm md:text-lg text-black">{technician.address}</span>
+                </div>
               </div>
             </div>
             
-            <div className="flex flex-col gap-2 sm:flex-row">
-              <button className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" fill="currentColor"/>
-                </svg>
-                Call Now
-              </button>
-              
-              <button className="bg-[#AF2638] text-white px-6 py-2 rounded-md hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clipPath="url(#clip0_39_695)">
-                    <path d="M12.041 0.257324V2.9297H14.7132L12.041 0.257324Z" fill="white"/>
-                    <path d="M11.6016 3.80859C11.3589 3.80859 11.1621 3.61184 11.1621 3.36914V0H4.86328C4.13634 0 3.54492 0.591416 3.54492 1.31836V6.23112C3.68971 6.218 3.83622 6.21094 3.98438 6.21094C5.48227 6.21094 6.82315 6.89578 7.71053 7.96875H12.4805C12.7232 7.96875 12.9199 8.16551 12.9199 8.4082C12.9199 8.6509 12.7232 8.84766 12.4805 8.84766H8.28949C8.56418 9.38367 8.74131 9.97749 8.79817 10.6055H12.4805C12.7232 10.6055 12.9199 10.8022 12.9199 11.0449C12.9199 11.2876 12.7232 11.4844 12.4805 11.4844H8.79817C8.66675 12.9357 7.89132 14.2039 6.76049 15H13.6523C14.3793 15 14.9707 14.4086 14.9707 13.6816V3.80859H11.6016ZM12.4805 6.21094H6.03516C5.79246 6.21094 5.5957 6.01418 5.5957 5.77148C5.5957 5.52879 5.79246 5.33203 6.03516 5.33203H12.4805C12.7232 5.33203 12.9199 5.52879 12.9199 5.77148C12.9199 6.01418 12.7232 6.21094 12.4805 6.21094Z" fill="white"/>
-                    <path d="M3.98438 7.08984C1.80354 7.08984 0.0292969 8.86409 0.0292969 11.0449C0.0292969 13.2258 1.80354 15 3.98438 15C6.16521 15 7.93945 13.2258 7.93945 11.0449C7.93945 8.86409 6.16521 7.08984 3.98438 7.08984ZM3.74024 10.6055H4.22854C4.74006 10.6055 5.15625 11.0217 5.15625 11.5332V12.0215C5.15625 12.466 4.84189 12.8384 4.42383 12.9284V13.0957C4.42383 13.3384 4.22707 13.5352 3.98438 13.5352C3.74168 13.5352 3.54492 13.3384 3.54492 13.0957V12.9284C3.12686 12.8384 2.8125 12.466 2.8125 12.0215C2.8125 11.7788 3.00926 11.582 3.25195 11.582C3.49465 11.582 3.69141 11.7788 3.69141 12.0215C3.69141 12.0484 3.71332 12.0703 3.74024 12.0703H4.22854C4.25546 12.0703 4.27737 12.0484 4.27737 12.0215V11.5332C4.27737 11.5063 4.25546 11.4844 4.22854 11.4844H3.74024C3.22869 11.4844 2.8125 11.0682 2.8125 10.5566V10.0684C2.8125 9.62382 3.12686 9.25146 3.54492 9.16148V8.99414C3.54492 8.75145 3.74168 8.55469 3.98438 8.55469C4.22707 8.55469 4.42383 8.75145 4.42383 8.99414V9.16148C4.84189 9.25146 5.15625 9.62382 5.15625 10.0684C5.15625 10.3111 4.95949 10.5078 4.7168 10.5078C4.4741 10.5078 4.27734 10.3111 4.27734 10.0684C4.27734 10.0414 4.25543 10.0195 4.22851 10.0195H3.74021C3.71329 10.0195 3.69138 10.0414 3.69138 10.0684V10.5566C3.69141 10.5836 3.71332 10.6055 3.74024 10.6055Z" fill="white"/>
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_39_695">
-                      <rect width="15" height="15" fill="white"/>
-                    </clipPath>
-                  </defs>
-                </svg>
-                Get a Free Quote
-              </button>
+            {/* Social Media section */}
+            <div>
+              <div className="flex space-x-4 md:space-x-6">
+                {['facebook', 'instagram', 'linkedin', 'twitter', 'youtube'].map((platform) => (
+                  <div key={platform} className="w-4 h-4 md:w-5 md:h-5 bg-[#213A59] rounded flex items-center justify-center">
+                    <svg className="w-2 h-2 md:w-3 md:h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                    </svg>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Reviews Section */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Customer Reviews</h2>
-          
-          {reviews.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="text-gray-500">No reviews available for this technician yet.</p>
+        );
+      
+      case 'Portfolio':
+        return (
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-black">Portfolio</h3>
+              <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4">
+                {Array.from({ length: 15 }, (_, i) => (
+                  <div key={i} className="aspect-[3/2] bg-gray-200 rounded-lg overflow-hidden">
+                    <img 
+                      src="/portfolio-1.png" 
+                      alt={`Portfolio ${i + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="md:hidden flex justify-center mt-4">
+                <div className="flex space-x-2">
+                  <button className="w-5 h-5 bg-gray-800 text-white rounded text-xs flex items-center justify-center">1</button>
+                  <button className="w-5 h-5 bg-gray-300 text-black rounded text-xs flex items-center justify-center">2</button>
+                  <button className="w-5 h-5 bg-gray-300 text-black rounded text-xs flex items-center justify-center">3</button>
+                </div>
+              </div>
             </div>
-          ) : (
-            <div className="space-y-6">
-              {reviews.map((review) => (
-                <div key={review.id} className="border-b border-gray-200 pb-6 last:border-b-0">
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold text-gray-900">{review.customerName}</h3>
-                        {review.verified && (
-                          <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                            Verified Customer
-                          </span>
-                        )}
+          </div>
+        );
+      
+      case 'Reviews':
+        return (
+          <div className="space-y-4 md:space-y-6">
+            {/* Reviews Header */}
+            <div>
+              <h3 className="text-lg md:text-2xl font-semibold mb-2 md:mb-3 text-black">Reviews</h3>
+              <p className="text-sm md:text-lg font-semibold text-black mb-2">{technician.reviews} Verified Reviews</p>
+              <div className="flex items-center gap-2 md:gap-4">
+                <span className="text-sm md:text-lg font-semibold text-black">{technician.rating}/5</span>
+                <div className="flex text-yellow-400">
+                  {renderStars(technician.rating, "text-sm md:text-base")}
+                </div>
+                <span className="text-sm md:text-lg text-black">average rating</span>
+              </div>
+              <button className="md:hidden mt-4 bg-[#AF2638] text-white px-4 py-2 rounded-lg text-xs font-medium hover:bg-red-700 transition-colors">
+                Write A Review
+              </button>
+            </div>
+            
+            {/* Reviews List */}
+            <div className="space-y-4 md:space-y-8">
+              {reviews.slice(0, 3).map((review, index) => (
+                <div key={review.id}>
+                  <div className="flex items-start gap-3 md:gap-4">
+                    <div className="w-8 h-8 md:w-12 md:h-12 bg-gray-300 rounded-full flex-shrink-0 overflow-hidden">
+                      <img 
+                        src="/profile-avatar.png" 
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 md:gap-3 mb-1 md:mb-2">
+                        <h4 className="text-xs md:text-lg font-semibold text-black">{review.customerName}</h4>
+                        <div className="flex text-yellow-400">
+                          {renderStars(review.rating, "text-xs md:text-base")}
+                        </div>
                       </div>
-                      <div className="flex items-center gap-3">
-                        {renderStars(review.rating)}
-                        <span className="text-sm text-gray-600">{formatDate(review.date)}</span>
-                        <span className="text-sm bg-gray-100 px-2 py-1 rounded text-gray-600">
-                          {review.service}
-                        </span>
-                      </div>
+                      <p className="text-xs md:text-sm text-black mb-2 md:mb-4">{review.reviewCount} Reviews</p>
+                      <p className="text-xs md:text-lg text-black leading-relaxed">{review.comment}</p>
                     </div>
                   </div>
-                  
-                  <p className="text-gray-700 leading-relaxed">{review.comment}</p>
+                  {index < reviews.slice(0, 3).length - 1 && (
+                    <hr className="mt-4 md:mt-8 border-gray-300" />
+                  )}
                 </div>
               ))}
             </div>
-          )}
-        </div>
-        
-        {/* Additional Information */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Service Areas</h3>
-            <div className="space-y-2">
-              <p className="text-gray-600">Primary Service Area: {technician.distance}km radius</p>
-              <p className="text-gray-600">Emergency Service: {technician.emergency ? 'Available 24/7' : 'Regular hours only'}</p>
-              <p className="text-gray-600">Verification Status: {technician.verified ? 'HSB Verified' : 'Not verified'}</p>
+
+            {/* Load More Button */}
+            <div className="flex justify-center mt-6 md:mt-8">
+              <button className="bg-[#AF2638] text-white px-6 md:px-8 py-2 md:py-3 rounded-lg text-xs md:text-lg font-medium hover:bg-red-700 transition-colors">
+                Load More
+              </button>
             </div>
+          </div>
+        );
+      
+      case 'Contact Info':
+        return (
+          <div className="space-y-4 md:space-y-6">
+            <div>
+              <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-black">Contact Information</h3>
+              <div className="space-y-3 md:space-y-4">
+                <div className="flex items-center">
+                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                  </svg>
+                  <span className="text-sm md:text-lg text-black">{technician.phone}</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.559-.499-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.559.499.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.497-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.148.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.032 11H4.083a6.004 6.004 0 002.851 4.118z" clipRule="evenodd"/>
+                  </svg>
+                  <span className="text-sm md:text-lg text-black">{technician.website}</span>
+                </div>
+                <div className="flex items-center">
+                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
+                  </svg>
+                  <span className="text-sm md:text-lg text-black">{technician.address}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+     
+
+      {/* Main Content Container */}
+      <div className="max-w-[1500px] mx-auto md:px-0">
+        {/* Hero Section - Desktop */}
+        <div className="hidden md:block relative h-[600px] overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: 'url(/hero-background.png)'
+            }}
+          >
+            <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           </div>
           
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Specializations</h3>
-            <div className="flex flex-wrap gap-2">
-              {technician.services.map((service, index) => (
-                <span key={index} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
-                  {service}
-                </span>
-              ))}
+          {/* Company Info Content */}
+          <div className="relative z-10 flex items-end h-full px-48 pb-12">
+            <div className="flex items-end gap-8 w-full">
+              {/* Company Logo */}
+              <div className="w-60 h-60 bg-white rounded-lg shadow-lg flex items-center justify-center flex-shrink-0 p-4">
+                <img 
+                  src="/company-logo.png" 
+                  alt="Company Logo"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              
+              {/* Company Details */}
+              <div className="flex-1">
+                <h1 className="text-4xl font-semibold text-white mb-2">{technician.name}</h1>
+                <p className="text-xl text-white mb-2">HVAC Technician</p>
+                <p className="text-xl text-white mb-8">{technician.address}</p>
+                
+                <div className="flex items-center gap-6">
+                  <button 
+                    onClick={() => setShowContactModal(true)}
+                    className="bg-[#AF2638] text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-red-700 transition-colors flex items-center gap-3"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                    </svg>
+                    Get a Free Quote
+                  </button>
+                  <button className="border-2 border-white text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-white hover:text-gray-900 transition-colors flex items-center gap-3">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    Write a Review
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Hero Section - Mobile */}
+        <div className="md:hidden">
+          {/* Background Image */}
+          <div 
+            className="h-[200px] bg-cover bg-center relative"
+            style={{
+              backgroundImage: 'url(/herobackgroundmobile.png)'
+            }}
+          >
+            <div className="absolute inset-0  bg-opacity-50"></div>
+          </div>
+          
+          {/* Company Logo */}
+          <div className="flex justify-center -mt-16 relative z-10 mb-4">
+            <div className="w-32 h-32 lg:w-32 lg:h-32 bg-white rounded-lg shadow-lg flex items-center justify-center border border-gray-300 p-2">
+              <img 
+                src="/company-logo.png" 
+                alt="Company Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </div>
+
+          {/* Company Name */}
+          <div className="text-center mb-4">
+            <h1 className="text-xl font-semibold text-black mb-2">{technician.name}</h1>
+            
+            {/* HSB Verification Badges */}
+            <div className="flex justify-center gap-2 mb-4">
+              <img 
+                src="/HSBverification.png" 
+                alt="HSB Verification"
+                className="h-6 w-auto object-contain"
+              />
+              <img 
+                src="/HSBverification.png" 
+                alt="HSB Verification"
+                className="h-6 w-auto object-contain"
+              />
+            </div>
+          </div>
+
+          {/* Mobile Action Buttons */}
+          <div className="px-5">
+            <div className="flex gap-3 mb-6">
+              <button className="flex-1 bg-[#26AF2D] text-white py-2.5  text-xs font-medium">
+                Call Now
+              </button>
+              <button 
+                onClick={() => setShowContactModal(true)}
+                className="flex-1 bg-[#AF2638] text-white py-2.5  text-xs font-medium"
+              >
+                Get A Free Quote
+              </button>
+              <button className="flex-1 bg-[#213A59] text-white py-2.5  text-xs font-medium">
+                Write A Review
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bureau Score Section */}
+        <div className="bg-gray-100 md:bg-gray-100 px-5 md:px-48 py-6 md:py-24">
+          <div className="bg-white md:bg-white rounded-lg md:rounded-2xl p-5 md:p-14 shadow-sm">
+            <div className="md:flex md:items-center md:justify-between">
+              <div className="md:flex md:items-center md:gap-16">
+                <div>
+                  <h2 className="text-base md:text-3xl font-semibold text-black mb-3 md:mb-6">Bureau Score</h2>
+                  <div className="flex items-center gap-4 md:gap-8 mb-4 md:mb-0">
+                    <div className="text-center md:text-left">
+                      <div className="text-base md:text-4xl font-semibold text-black mb-1 md:mb-2">{technician.rating}</div>
+                      <div className="flex text-yellow-400 text-sm md:text-2xl">
+                        {renderStars(technician.rating, "text-sm md:text-2xl")}
+                      </div>
+                    </div>
+                    <div className="md:hidden">
+                      <p className="text-xs text-black">based on {technician.reviews.toLocaleString()} Reviews</p>
+                    </div>
+                  </div>
+                  <div className="space-y-3 md:space-y-6">
+                    <div className="flex items-center gap-3 md:gap-6">
+                      <span className="text-xs md:text-base text-black w-16 md:w-24">Quality of Work</span>
+                      <div className="w-32 md:w-42 h-2.5 md:h-3 bg-gray-300 rounded-full">
+                        <div className="w-[56%] h-full bg-[#213A59] rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 md:gap-6">
+                      <span className="text-xs md:text-base text-black w-16 md:w-24">Response Time</span>
+                      <div className="w-32 md:w-42 h-2.5 md:h-3 bg-gray-300 rounded-full">
+                        <div className="w-[80%] h-full bg-[#213A59] rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 md:gap-6">
+                      <span className="text-xs md:text-base text-black w-16 md:w-24">Budget</span>
+                      <div className="w-32 md:w-42 h-2.5 md:h-3 bg-gray-300 rounded-full">
+                        <div className="w-[96%] h-full bg-[#213A59] rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 md:gap-6">
+                      <span className="text-xs md:text-base text-black w-16 md:w-24">Communication</span>
+                      <div className="w-32 md:w-42 h-2.5 md:h-3 bg-gray-300 rounded-full">
+                        <div className="w-[86%] h-full bg-[#213A59] rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="hidden md:block border-l border-gray-300 h-24 mx-8"></div>
+                
+                <div className="hidden md:block">
+                  <p className="text-base font-semibold text-black mb-6">Review by score</p>
+                  <div className="text-4xl font-semibold text-black mb-2">4.7/5</div>
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-6">
+                      <span className="text-base text-black w-24">Quality of Work</span>
+                      <div className="w-42 h-3 bg-gray-300 rounded-full">
+                        <div className="w-[56%] h-full bg-[#213A59] rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-6">
+                      <span className="text-base text-black w-24">Response Time</span>
+                      <div className="w-42 h-3 bg-gray-300 rounded-full">
+                        <div className="w-[80%] h-full bg-[#213A59] rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-6">
+                      <span className="text-base text-black w-24">Budget</span>
+                      <div className="w-42 h-3 bg-gray-300 rounded-full">
+                        <div className="w-[96%] h-full bg-[#213A59] rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="hidden md:flex md:items-center md:gap-6">
+                <div className="w-36 h-12">
+                  <img 
+                    src="/hsb-verification-1.png" 
+                    alt="HSB Verification"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="w-36 h-12">
+                  <img 
+                    src="/hsb-verification-1.png" 
+                    alt="HSB Verification"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="px-5 md:px-48">
+          <div className="flex border-b border-gray-300 overflow-x-auto">
+            {['Profile', 'Portfolio', 'Reviews', 'Contact Info'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-3 md:px-6 py-3 md:py-4 text-sm md:text-3xl font-normal border-b-2 transition-colors whitespace-nowrap ${
+                  activeTab === tab
+                    ? 'border-[#AF2638] text-[#AF2638] bg-red-50'
+                    : 'border-transparent text-black hover:text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Tab Content */}
+        <div className="px-5 md:px-48 py-6 md:py-16">
+          {renderTabContent()}
+        </div>
+
+     
+
+      
       </div>
+
+      {/* Contact Modal */}
+      {showContactModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 md:p-8 max-w-sm md:max-w-md w-full mx-4">
+            <div className="flex justify-between items-center mb-4 md:mb-6">
+              <h3 className="text-lg md:text-xl font-semibold">Contact {technician.name}</h3>
+              <button 
+                onClick={() => setShowContactModal(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                <p className="text-base md:text-lg font-semibold text-blue-600">{technician.phone}</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                <p className="text-sm text-gray-600">{technician.address}</p>
+              </div>
+              <div className="flex gap-3 pt-4">
+                <button className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors">
+                  Call Now
+                </button>
+                <button className="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
