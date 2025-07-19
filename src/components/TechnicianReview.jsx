@@ -154,7 +154,7 @@ const TechnicianReview = () => {
             </div>
 
             {/* Portfolio section */}
-            <div>
+            {/* <div>
               <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-black">Portfolio</h3>
               <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4">
                 {Array.from({ length: activeTab === 'Portfolio' ? 15 : 3 }, (_, i) => (
@@ -176,45 +176,11 @@ const TechnicianReview = () => {
                   </div>
                 </div>
               )}
-            </div>
+            </div> */}
 
-            {/* Contact Information section */}
-            <div>
-              <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-black">Contact Information</h3>
-              <div className="space-y-3 md:space-y-4">
-                <div className="flex items-center">
-                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-                  </svg>
-                  <span className="text-sm md:text-lg text-black">{technician.phone}</span>
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.559-.499-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.559.499.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.497-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.148.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.032 11H4.083a6.004 6.004 0 002.851 4.118z" clipRule="evenodd"/>
-                  </svg>
-                  <span className="text-sm md:text-lg text-black">{technician.website}</span>
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-black" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
-                  </svg>
-                  <span className="text-sm md:text-lg text-black">{technician.address}</span>
-                </div>
-              </div>
-            </div>
+          
             
-            {/* Social Media section */}
-            <div>
-              <div className="flex space-x-4 md:space-x-6">
-                {['facebook', 'instagram', 'linkedin', 'twitter', 'youtube'].map((platform) => (
-                  <div key={platform} className="w-4 h-4 md:w-5 md:h-5 bg-[#213A59] rounded flex items-center justify-center">
-                    <svg className="w-2 h-2 md:w-3 md:h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                    </svg>
-                  </div>
-                ))}
-              </div>
-            </div>
+        
           </div>
         );
       
@@ -249,7 +215,7 @@ const TechnicianReview = () => {
         return (
           <div className="space-y-4 md:space-y-6">
             {/* Reviews Header */}
-            <div>
+              <div>
               <h3 className="text-lg md:text-2xl font-semibold mb-2 md:mb-3 text-black">Reviews</h3>
               <p className="text-sm md:text-lg font-semibold text-black mb-2">{technician.reviews} Verified Reviews</p>
               <div className="flex items-center gap-2 md:gap-4">
@@ -306,7 +272,7 @@ const TechnicianReview = () => {
       case 'Contact Info':
         return (
           <div className="space-y-4 md:space-y-6">
-            <div>
+              <div>
               <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-black">Contact Information</h3>
               <div className="space-y-3 md:space-y-4">
                 <div className="flex items-center">
@@ -314,20 +280,83 @@ const TechnicianReview = () => {
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
                   </svg>
                   <span className="text-sm md:text-lg text-black">{technician.phone}</span>
-                </div>
+              </div>
                 <div className="flex items-center">
                   <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-black" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.559-.499-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.559.499.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.497-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.148.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.032 11H4.083a6.004 6.004 0 002.851 4.118z" clipRule="evenodd"/>
                   </svg>
                   <span className="text-sm md:text-lg text-black">{technician.website}</span>
-                </div>
+              </div>
                 <div className="flex items-center">
                   <svg className="w-3 h-3 md:w-4 md:h-4 mr-3 text-black" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
                   </svg>
                   <span className="text-sm md:text-lg text-black">{technician.address}</span>
-                </div>
               </div>
+              </div>
+            </div>
+            <div className='flex space-x-4 md:space-x-6'>
+            <a href="#" className="text-[#213A59] hover:text-gray-600">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_61_320)">
+          <path d="M17.0703 0H2.92969C1.31439 0 0 1.31439 0 2.92969V17.0703C0 18.6856 1.31439 20 2.92969 20H8.82812V12.9297H6.48438V9.41406H8.82812V7.03125C8.82812 5.09262 10.4051 3.51562 12.3438 3.51562H15.8984V7.03125H12.3438V9.41406H15.8984L15.3125 12.9297H12.3438V20H17.0703C18.6856 20 20 18.6856 20 17.0703V2.92969C20 1.31439 18.6856 0 17.0703 0Z" fill="#213A59"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_61_320">
+          <rect width="20" height="20" fill="white"/>
+          </clipPath>
+          </defs>
+          </svg>
+
+          </a>
+          <a href="#" className="text-[#213A59] hover:text-gray-600">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_61_322)">
+<path d="M11.7578 10C11.7578 10.9708 10.9708 11.7578 10 11.7578C9.02924 11.7578 8.24219 10.9708 8.24219 10C8.24219 9.02924 9.02924 8.24219 10 8.24219C10.9708 8.24219 11.7578 9.02924 11.7578 10Z" fill="#213A59"/>
+<path d="M12.9688 4.6875H7.03125C5.73883 4.6875 4.6875 5.73883 4.6875 7.03125V12.9688C4.6875 14.2612 5.73883 15.3125 7.03125 15.3125H12.9688C14.2612 15.3125 15.3125 14.2612 15.3125 12.9688V7.03125C15.3125 5.73883 14.2612 4.6875 12.9688 4.6875ZM10 12.9297C8.38455 12.9297 7.07031 11.6154 7.07031 10C7.07031 8.38455 8.38455 7.07031 10 7.07031C11.6154 7.07031 12.9297 8.38455 12.9297 10C12.9297 11.6154 11.6154 12.9297 10 12.9297ZM13.3594 7.22656C13.0357 7.22656 12.7734 6.96426 12.7734 6.64062C12.7734 6.31699 13.0357 6.05469 13.3594 6.05469C13.683 6.05469 13.9453 6.31699 13.9453 6.64062C13.9453 6.96426 13.683 7.22656 13.3594 7.22656Z" fill="#213A59"/>
+<path d="M14.7266 0H5.27344C2.36572 0 0 2.36572 0 5.27344V14.7266C0 17.6343 2.36572 20 5.27344 20H14.7266C17.6343 20 20 17.6343 20 14.7266V5.27344C20 2.36572 17.6343 0 14.7266 0ZM16.4844 12.9688C16.4844 14.9072 14.9072 16.4844 12.9688 16.4844H7.03125C5.09277 16.4844 3.51562 14.9072 3.51562 12.9688V7.03125C3.51562 5.09277 5.09277 3.51562 7.03125 3.51562H12.9688C14.9072 3.51562 16.4844 5.09277 16.4844 7.03125V12.9688Z" fill="#213A59"/>
+</g>
+<defs>
+<clipPath id="clip0_61_322">
+<rect width="20" height="20" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+          </a>
+          <a href="#" className="text-[#213A59] hover:text-gray-600">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <a href="#" className="text-[#213A59] hover:text-gray-600">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_61_330)">
+<path d="M10.6689 9.65857L15.1696 16.0962H13.3225L9.64982 10.8431V10.8428L9.11061 10.0716L4.82031 3.93469H6.66742L10.1297 8.88742L10.6689 9.65857Z" fill="#213A59"/>
+<path d="M17.839 0H2.16104C0.967563 0 0 0.967563 0 2.16104V17.839C0 19.0324 0.967563 20 2.16104 20H17.839C19.0324 20 20 19.0324 20 17.839V2.16104C20 0.967563 19.0324 0 17.839 0ZM12.7566 16.9604L9.0401 11.5514L4.38696 16.9604H3.18435L8.50611 10.7746L3.18435 3.02934H7.24336L10.7627 8.15126L15.1689 3.02934H16.3715L11.2968 8.92828H11.2965L16.8156 16.9604H12.7566Z" fill="#213A59"/>
+</g>
+<defs>
+<clipPath id="clip0_61_330">
+<rect width="20" height="20" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+          </a>
+          <a href="#" className="text-[#213A59] hover:text-gray-600">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_61_333)">
+<path d="M8.71436 8.03174V11.6825L12.0794 9.87301L8.71436 8.03174Z" fill="#213A59"/>
+<path d="M14.9841 0H5C2.25397 0 0 2.25397 0 5.01587V15C0 17.746 2.25397 20 5 20H14.9841C17.746 20 20 17.746 20 14.9841V5.01587C20 2.25397 17.746 0 14.9841 0ZM16.1905 10.4921C16.1905 11.5397 16.0952 12.6032 16.0952 12.6032C16.0952 12.6032 15.9841 13.4921 15.619 13.8889C15.1429 14.4127 14.619 14.4127 14.381 14.4444C12.6349 14.5714 10.0159 14.5873 10.0159 14.5873C10.0159 14.5873 6.7619 14.5397 5.7619 14.4444C5.49206 14.3968 4.85714 14.4127 4.38095 13.8889C4 13.4921 3.90476 12.6032 3.90476 12.6032C3.90476 12.6032 3.80952 11.5397 3.80952 10.4921V9.50794C3.80952 8.46032 3.90476 7.39683 3.90476 7.39683C3.90476 7.39683 4.01587 6.50794 4.38095 6.11111C4.85714 5.5873 5.38095 5.57143 5.61905 5.53968C7.38095 5.4127 10 5.39683 10 5.39683C10 5.39683 12.619 5.4127 14.3651 5.53968C14.6032 5.57143 15.1429 5.5873 15.619 6.09524C16 6.49206 16.0952 7.39683 16.0952 7.39683C16.0952 7.39683 16.1905 8.46032 16.1905 9.50794V10.4921Z" fill="#213A59"/>
+</g>
+<defs>
+<clipPath id="clip0_61_333">
+<rect width="20" height="20" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+          </a>
             </div>
           </div>
         );
@@ -451,85 +480,130 @@ const TechnicianReview = () => {
               <button className="flex-1 bg-[#213A59] text-white py-2.5  text-xs font-medium">
                 Write A Review
               </button>
-            </div>
           </div>
         </div>
+      </div>
 
         {/* Bureau Score Section */}
-        <div className="bg-gray-100 md:bg-gray-100 px-5 md:px-48 py-6 md:py-24">
-          <div className="bg-white md:bg-white rounded-lg md:rounded-2xl p-5 md:p-14 shadow-sm">
+        <div className=" px-5 md:px-48 py-6 md:py-24">
+          <div className="bg-[#F3F3F3]  rounded-lg md:rounded-2xl p-5 md:p-14 shadow-sm">
             <div className="md:flex md:items-center md:justify-between">
-              <div className="md:flex md:items-center md:gap-16">
+              <div className="md:flex md:items-center ">
                 <div>
-                  <h2 className="text-base md:text-3xl font-semibold text-black mb-3 md:mb-6">Bureau Score</h2>
-                  <div className="flex items-center gap-4 md:gap-8 mb-4 md:mb-0">
-                    <div className="text-center md:text-left">
-                      <div className="text-base md:text-4xl font-semibold text-black mb-1 md:mb-2">{technician.rating}</div>
-                      <div className="flex text-yellow-400 text-sm md:text-2xl">
-                        {renderStars(technician.rating, "text-sm md:text-2xl")}
+                  <div className="flex items-center gap-2 md:block mb-3 md:mb-6">
+                    <h2 className="text-base md:text-3xl font-semibold text-black">Bureau Score</h2>
+                    <div className="md:hidden text-center flex items-center justify-center">
+                      <div className="w-8 h-8 flex items-center justify-center">
+                        <svg className="w-6 h-6" viewBox="0 0 46 47" fill="none">
+                          <path d="M23 3.83L28.09 14.09L39.37 15.64L31.19 23.64L33.18 34.87L23 29.63L12.82 34.87L14.81 23.64L6.63 15.64L17.91 14.09L23 3.83Z" fill="url(#starGradientMobile)"/>
+                          <defs>
+                            <linearGradient id="starGradientMobile" x1="23" y1="3.83" x2="23" y2="34.87" gradientUnits="userSpaceOnUse">
+                              <stop stopColor="#FFE61C"/>
+                              <stop offset="1" stopColor="#FFA929"/>
+                            </linearGradient>
+                          </defs>
+                        </svg>
+                      </div>
+                      <div className="text-sm font-semibold text-black">{technician.rating}/5</div>
+                    </div>
+                    <p className='md:hidden'style={{fontSize: '12px'}} >Based on 1,143 Reviews</p>
+                  </div>
+                  <div className="flex items-start gap-4 md:gap-8 mb-4 md:mb-0">
+                    <div className="text-center md:text-left ">
+                      
+                    <div className="text-center md:text-left flex">
+                      {/* Star Rating */}
+                      <div className="hidden md:flex justify-center md:justify-start mb-2">
+                        <div className="w-12 h-12 md:w-12 md:h-12 flex items-center justify-center">
+                          <svg className="w-10 h-10 md:w-10 md:h-10" viewBox="0 0 46 47" fill="none">
+                            <path d="M23 3.83L28.09 14.09L39.37 15.64L31.19 23.64L33.18 34.87L23 29.63L12.82 34.87L14.81 23.64L6.63 15.64L17.91 14.09L23 3.83Z" fill="url(#starGradientDesktop)"/>
+                            <defs>
+                              <linearGradient id="starGradientDesktop" x1="23" y1="3.83" x2="23" y2="34.87" gradientUnits="userSpaceOnUse">
+                                <stop stopColor="#FFE61C"/>
+                                <stop offset="1" stopColor="#FFA929"/>
+                              </linearGradient>
+                            </defs>
+                      </svg>
+                    </div>
+                  </div>
+                      <div className="hidden md:block text-base md:text-4xl font-semibold text-black mb-1 md:mb-2">{technician.rating}/5</div>
+                    </div>
+                      
+                  
+                    </div>
+                    
+                {/* <div className="hidden md:block border-l border-gray-300 h-24 mx-8"></div>
+                 */}
+                    <div className="space-y-4 md:space-y-5">
+                    <div className="flex items-center justify-between gap-3 md:gap-4">
+                      <span className="text-xs md:text-xs text-black w-auto">Quality of Work</span>
+                      <div className="w-40 md:w-42 h-2.5 md:h-2.5 bg-[#D9D9D9]">
+                        <div className="w-[56%] h-full bg-[#213A59]"></div>
                       </div>
                     </div>
-                    <div className="md:hidden">
+                    <div className="flex justify-between items-center gap-3 md:gap-4">
+                      <span className="text-xs md:text-xs text-black w-auto">Response Time</span>
+                      <div className="w-40 md:w-42 h-2.5 md:h-2.5 bg-[#D9D9D9]">
+                        <div className="w-[80%] h-full bg-[#213A59]"></div>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center gap-3 md:gap-4">
+                      <span className="text-xs md:text-xs text-black w-auto">Budget</span>
+                      <div className="w-40 md:w-42 h-2.5 md:h-2.5 bg-[#D9D9D9]">
+                        <div className="w-[96%] h-full bg-[#213A59]"></div>
+                    </div>
+                  </div>
+                    <div className="flex justify-between items-center gap-3 md:gap-4">
+                      <span className="text-xs md:text-xs text-black w-auto">Communication</span>
+                      <div className="w-40 md:w-42 h-2.5 md:h-2.5 bg-[#D9D9D9]">
+                        <div className="w-[86%] h-full bg-[#213A59]"></div>
+                      </div>
+                    </div>
+                  </div>
+                    {/* <div className="md:hidden">
                       <p className="text-xs text-black">based on {technician.reviews.toLocaleString()} Reviews</p>
-                    </div>
+                    </div> */}
                   </div>
-                  <div className="space-y-3 md:space-y-6">
-                    <div className="flex items-center gap-3 md:gap-6">
-                      <span className="text-xs md:text-base text-black w-16 md:w-24">Quality of Work</span>
-                      <div className="w-32 md:w-42 h-2.5 md:h-3 bg-gray-300 rounded-full">
-                        <div className="w-[56%] h-full bg-[#213A59] rounded-full"></div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 md:gap-6">
-                      <span className="text-xs md:text-base text-black w-16 md:w-24">Response Time</span>
-                      <div className="w-32 md:w-42 h-2.5 md:h-3 bg-gray-300 rounded-full">
-                        <div className="w-[80%] h-full bg-[#213A59] rounded-full"></div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 md:gap-6">
-                      <span className="text-xs md:text-base text-black w-16 md:w-24">Budget</span>
-                      <div className="w-32 md:w-42 h-2.5 md:h-3 bg-gray-300 rounded-full">
-                        <div className="w-[96%] h-full bg-[#213A59] rounded-full"></div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 md:gap-6">
-                      <span className="text-xs md:text-base text-black w-16 md:w-24">Communication</span>
-                      <div className="w-32 md:w-42 h-2.5 md:h-3 bg-gray-300 rounded-full">
-                        <div className="w-[86%] h-full bg-[#213A59] rounded-full"></div>
-                      </div>
-                    </div>
-                  </div>
+
+               
+
+              
                 </div>
                 
                 <div className="hidden md:block border-l border-gray-300 h-24 mx-8"></div>
                 
                 <div className="hidden md:block">
                   <p className="text-base font-semibold text-black mb-6">Review by score</p>
-                  <div className="text-4xl font-semibold text-black mb-2">4.7/5</div>
+                  
                   <div className="space-y-6">
-                    <div className="flex items-center gap-6">
-                      <span className="text-base text-black w-24">Quality of Work</span>
-                      <div className="w-42 h-3 bg-gray-300 rounded-full">
-                        <div className="w-[56%] h-full bg-[#213A59] rounded-full"></div>
+                  <div className="space-y-4 md:space-y-5">
+                    <div className="flex justify-between items-center gap-3 md:gap-4">
+                      <span className="text-xs md:text-xs text-black w-auto">Quality of Work</span>
+                      <div className="w-40 md:w-42 h-2.5 md:h-2.5 bg-[#D9D9D9]">
+                        <div className="w-[56%] h-full bg-[#213A59]"></div>
+                      </div>
+                          </div>
+                    <div className="flex justify-between items-center gap-3 md:gap-4">
+                      <span className="text-xs md:text-xs text-black w-auto">Response Time</span>
+                      <div className="w-40 md:w-42 h-2.5 md:h-2.5 bg-[#D9D9D9]">
+                        <div className="w-[80%] h-full bg-[#213A59]"></div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-6">
-                      <span className="text-base text-black w-24">Response Time</span>
-                      <div className="w-42 h-3 bg-gray-300 rounded-full">
-                        <div className="w-[80%] h-full bg-[#213A59] rounded-full"></div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-6">
-                      <span className="text-base text-black w-24">Budget</span>
-                      <div className="w-42 h-3 bg-gray-300 rounded-full">
-                        <div className="w-[96%] h-full bg-[#213A59] rounded-full"></div>
-                      </div>
-                    </div>
+                    <div className="flex justify-between items-center gap-3 md:gap-4">
+                      <span className="text-xs md:text-xs text-black w-auto">Budget</span>
+                      <div className="w-40 md:w-42 h-2.5 md:h-2.5 bg-[#D9D9D9]">
+                        <div className="w-[96%] h-full bg-[#213A59]"></div>
+                  </div>
+                </div>
+                  
+                  </div>
+
+                    
                   </div>
                 </div>
               </div>
               
-              <div className="hidden md:flex md:items-center md:gap-6">
+              <div className="hidden md:flex flex-col md:items-center md:gap-6">
                 <div className="w-36 h-12">
                   <img 
                     src="/hsb-verification-1.png" 
@@ -543,34 +617,34 @@ const TechnicianReview = () => {
                     alt="HSB Verification"
                     className="w-full h-full object-contain"
                   />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Navigation Tabs */}
+          {/* Navigation Tabs */}
         <div className="px-5 md:px-48">
           <div className="flex border-b border-gray-300 overflow-x-auto">
-            {['Profile', 'Portfolio', 'Reviews', 'Contact Info'].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
+                {['Profile', 'Portfolio', 'Reviews', 'Contact Info'].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
                 className={`px-3 md:px-6 py-3 md:py-4 text-sm md:text-3xl font-normal border-b-2 transition-colors whitespace-nowrap ${
-                  activeTab === tab
+                      activeTab === tab
                     ? 'border-[#AF2638] text-[#AF2638] bg-red-50'
                     : 'border-transparent text-black hover:text-gray-700 hover:bg-gray-50'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+            </div>
           </div>
-        </div>
 
-        {/* Tab Content */}
+          {/* Tab Content */}
         <div className="px-5 md:px-48 py-6 md:py-16">
-          {renderTabContent()}
+            {renderTabContent()}
         </div>
 
      
