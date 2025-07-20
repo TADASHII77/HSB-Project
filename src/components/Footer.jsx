@@ -12,9 +12,9 @@ const Footer = () => {
           <div className="space-y-4 text-sm">
             <div>
               <ul className="space-y-3 text-gray-300">
-                <li><a href="#" className="hover:text-white">Post a job</a></li>
-                <li><a href="#" className="hover:text-white">Find local experts</a></li>
-                <li><a href="#" className="hover:text-white">Bureau verified experts</a></li>
+                <li><a href="/job" className="hover:text-white">Post a job</a></li>
+                <li><a href="/" className="hover:text-white">Find local experts</a></li>
+                <li><a href="/business" className="hover:text-white">Register your business</a></li>
                 <li><a href="#" className="hover:text-white">Customer help desk</a></li>
                 <li><a href="#" className="hover:text-white">Experts help desk</a></li>
               </ul>
@@ -75,9 +75,9 @@ const Footer = () => {
         <div className="hidden sm:grid grid-cols-3 gap-8 text-sm">
           <div>
             <ul className="space-y-2 text-gray-300">
-              <li><a href="#" className="hover:text-white">Post a job</a></li>
-              <li><a href="#" className="hover:text-white">Find local experts</a></li>
-              <li><a href="#" className="hover:text-white">Bureau verified experts</a></li>
+              <li><a href="/job" className="hover:text-white">Post a job</a></li>
+              <li><a href="/" className="hover:text-white">Find local experts</a></li>
+              <li><a href="/business" className="hover:text-white">Register your business</a></li>
               <li><a href="#" className="hover:text-white">Customer help desk</a></li>
               <li><a href="#" className="hover:text-white">Experts help desk</a></li>
             </ul>

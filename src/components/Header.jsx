@@ -152,9 +152,9 @@ const Header = ({ isMenuOpen, toggleMenu, userLocation, setUserLocation }) => {
                 <div className="p-3 sm:p-4">
                   <div className="space-y-2 sm:space-y-3">
                     <h3 className="font-semibold text-[#213A59] border-b pb-2 text-sm sm:text-base">Services</h3>
-                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">Find HVAC Experts</a>
-                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">Emergency Service</a>
-                    <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">Maintenance Plans</a>
+                    <a href="/" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">Find HVAC Experts</a>
+                    <a href="/job" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">Post a Job</a>
+                    <a href="/business" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">Register Business</a>
                     
                     <h3 className="font-semibold text-[#213A59] border-b pb-2 pt-3 text-sm sm:text-base">Account</h3>
                     <a href="#" className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded transition-colors text-sm">My Account</a>

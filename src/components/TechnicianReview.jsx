@@ -6,7 +6,7 @@ const TechnicianReview = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('Profile');
-    const [showContactModal, setShowContactModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   const technician = techniciansData[id];
   const reviews = reviewsData[id] || [];
@@ -345,7 +345,7 @@ const TechnicianReview = () => {
                 <p className="text-xl text-white mb-2">HVAC Technician</p>
                 <p className="text-xl text-white mb-8">{technician.address}</p>
                 
-                <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6">
                   <button 
                     onClick={() => setShowContactModal(true)}
                     className="bg-[#AF2638] text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-red-700 transition-colors flex items-center gap-3"
@@ -358,28 +358,28 @@ const TechnicianReview = () => {
                   <button className="border-2 border-white text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-white hover:text-gray-900 transition-colors flex items-center gap-3">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                    </svg>
+                </svg>
                     Write a Review
-                  </button>
+              </button>
                 </div>
               </div>
-            </div>
           </div>
         </div>
+      </div>
 
         {/* Hero Section - Mobile */}
         <div className="md:hidden">
-          {/* Background Image */}
-          <div 
+            {/* Background Image */}
+            <div 
             className="h-[200px] bg-cover bg-center relative"
-            style={{
+              style={{
               backgroundImage: 'url(/herobackgroundmobile.png)'
-            }}
-          >
+              }}
+            >
             <div className="absolute inset-0  bg-opacity-50"></div>
           </div>
-          
-          {/* Company Logo */}
+              
+                  {/* Company Logo */}
           <div className="flex justify-center -mt-16 relative z-10 mb-4">
             <div className="w-32 h-32 lg:w-32 lg:h-32 bg-white rounded-lg shadow-lg flex items-center justify-center border border-gray-300 p-2">
               <img 
