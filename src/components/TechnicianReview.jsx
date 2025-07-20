@@ -1,68 +1,12 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { techniciansData, reviewsData } from '../data/techniciansData';
 
 const TechnicianReview = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('Profile');
-  const [showContactModal, setShowContactModal] = useState(false);
-
-  // Sample technician data
-  const techniciansData = {
-    1: {
-      id: 1,
-      name: "All Green Energy Solutions",
-      rating: 4.7,
-      reviews: 500,
-      services: ["HVAC contractor", "General contractor", "Window Contractor"],
-      verified: true,
-      emergency: true,
-      distance: 2.3,
-      category: "Heating",
-      address: "7500 ON-27, Vaughan, ON L4H 0J2",
-      phone: "+1 833-475-0705",
-      website: "www.allgreenenergysolutions.com",
-      description: "All Green Energy Solutions Net Zero is a energy y affordability solution provider in Ontario that provides innovative sustainable solutions to create a greener future. We specialize in building energy-efficient green homes and other projects that prioritize energy conservation, resource efficiency, and a reduced environmental footprint.",
-      serviceAreas: "Toronto, Ontario; Vaughan, Ontario; Mississauga, Ontario",
-      expertise: "HVAC contractor, General contractor, Window Contractor, Kitchen Renovation Company, Handyman, Landscaping Company, Carpenter, Plumber, Tiler, Architect, Bathroom Renovation Company, Demolition company, Mason, Cabinet maker, Metal worker, Pool company, Interior designer, Interior decorator, Concrete Specialist, Garage Specialist, Condominium/Apartment Specialist"
-    }
-  };
-
-  // Sample reviews data
-  const reviewsData = {
-    1: [
-      {
-        id: 1,
-        customerName: "User Full Name",
-        rating: 4,
-        date: "2024-01-15",
-        service: "HVAC Service",
-        comment: "I don't tend to write many reviews, however, I am extremely happy with the service from RCC Waterproofing. I have been working with many contractors while renovating my house, and have endured many ups and downs. However, with RCC, I had absolutely no issues. The consultant Jamie was great, Anthony Jr's crew was exceptional and Rita from the office was very congenial and professional. The crew did a great job, and cleaned up nicely. They were very courteous to the neighbors on either side of us, including the builder who is renovating next door. What a nice break after dealing with a variety of contractors.",
-        verified: true,
-        reviewCount: 4
-      },
-      {
-        id: 2,
-        customerName: "User Full Name",
-        rating: 4,
-        date: "2024-01-10",
-        service: "Installation",
-        comment: "I don't tend to write many reviews, however, I am extremely happy with the service from RCC Waterproofing. I have been working with many contractors while renovating my house, and have endured many ups and downs. However, with RCC, I had absolutely no issues. The consultant Jamie was great, Anthony Jr's crew was exceptional and Rita from the office was very congenial and professional. The crew did a great job, and cleaned up nicely. They were very courteous to the neighbors on either side of us, including the builder who is renovating next door. What a nice break after dealing with a variety of contractors.",
-        verified: true,
-        reviewCount: 4
-      },
-      {
-        id: 3,
-        customerName: "User Full Name",
-        rating: 4,
-        date: "2024-01-05",
-        service: "Maintenance",
-        comment: "I don't tend to write many reviews, however, I am extremely happy with the service from RCC Waterproofing. I have been working with many contractors while renovating my house, and have endured many ups and downs. However, with RCC, I had absolutely no issues. The consultant Jamie was great, Anthony Jr's crew was exceptional and Rita from the office was very congenial and professional. The crew did a great job, and cleaned up nicely. They were very courteous to the neighbors on either side of us, including the builder who is renovating next door. What a nice break after dealing with a variety of contractors.",
-        verified: true,
-        reviewCount: 4
-      }
-    ]
-  };
+    const [showContactModal, setShowContactModal] = useState(false);
 
   const technician = techniciansData[id];
   const reviews = reviewsData[id] || [];
