@@ -6,6 +6,7 @@ import TechniciansList from './components/TechniciansList.jsx';
 import TechnicianReview from './components/TechnicianReview.jsx';
 import JobPosting from './components/JobPosting.jsx';
 import BusinessPosting from './components/BusinessPosting.jsx';
+import ExpertContactForm from './components/ExpertContactForm.jsx';
 import Footer from './components/Footer.jsx';
 
 // Home component that contains the main page layout
@@ -86,6 +87,7 @@ function App() {
           <Route path="/technician/:id" element={<TechnicianReview />} />
           <Route path="/job" element={<JobPosting />} />
           <Route path="/business" element={<BusinessPosting />} />
+          <Route path="/expert-contact" element={<ExpertContactForm />} />
         </Routes>
         
         <Footer />

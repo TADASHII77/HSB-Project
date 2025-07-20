@@ -24,8 +24,7 @@ const JobPosting = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Job posting submitted:', formData);
-    alert('Job posting submitted successfully!');
-    navigate('/');
+    navigate('/expert-contact');
   };
 
   return (

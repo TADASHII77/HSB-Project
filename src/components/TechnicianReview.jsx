@@ -96,7 +96,7 @@ const TechnicianReview = () => {
                 </p>
               </div>
             </div>
-
+            
             {/* Portfolio section */}
             {/* <div>
               <h3 className="text-lg md:text-2xl font-semibold mb-4 md:mb-6 text-black">Portfolio</h3>
@@ -118,7 +118,7 @@ const TechnicianReview = () => {
                     <button className="w-5 h-5 bg-gray-300 text-black rounded text-xs flex items-center justify-center">2</button>
                     <button className="w-5 h-5 bg-gray-300 text-black rounded text-xs flex items-center justify-center">3</button>
                   </div>
-                </div>
+            </div>
               )}
             </div> */}
 
@@ -362,7 +362,7 @@ const TechnicianReview = () => {
                     Write a Review
               </button>
                 </div>
-              </div>
+            </div>
           </div>
         </div>
       </div>
