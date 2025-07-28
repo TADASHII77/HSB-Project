@@ -1,5 +1,6 @@
 import express from 'express';
 import Technician from '../models/Technician.js';
+import emailService from '../services/emailService.js';
 
 const router = express.Router();
 
@@ -178,6 +179,71 @@ router.post('/', async (req, res) => {
     res.status(400).json({
       success: false,
       message: 'Error creating technician',
+      error: error.message
+    });
+  }
+});
+
+// Request quote from technician
+router.post('/:id/quote', async (req, res) => {
+  try {
+    const { customerName, customerEmail } = req.body;
+    
+    // Validate required fields
+    if (!customerName || !customerEmail) {
+      return res.status(400).json({
+        success: false,
+        message: 'Customer name and email are required'
+      });
+    }
+
+    // Find the technician
+    const technician = await Technician.findOne({ technicianId: req.params.id });
+    
+    if (!technician) {
+      return res.status(404).json({
+        success: false,
+        message: 'Technician not found'
+      });
+    }
+
+    // Send emails
+    const emailResult = await emailService.sendQuoteRequestEmails(
+      technician.email,
+      customerEmail,
+      technician.name,
+      customerName
+    );
+
+    if (emailResult.success) {
+      res.json({
+        success: true,
+        message: 'Quote request sent successfully',
+        data: {
+          technician: {
+            id: technician.technicianId,
+            name: technician.name,
+            email: technician.email
+          },
+          customer: {
+            name: customerName,
+            email: customerEmail
+          },
+          emailResults: emailResult.results
+        }
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'Failed to send quote request emails',
+        error: emailResult.error
+      });
+    }
+  } catch (error) {
+    console.error('Error processing quote request:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server Error',
       error: error.message
     });
   }

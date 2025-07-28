@@ -13,10 +13,10 @@ This is the easiest and fastest solution:
 4. **Get your connection string**:
    - Click "Connect" on your cluster
    - Choose "Connect your application"
-   - Copy the connection string (looks like: `mongodb+srv://username:password@cluster.mongodb.net/`)
+   - Copy the connection string provided by Atlas
 5. **Update your .env file** in `HSB/Backend/.env`:
    ```
-   MONGODB_URI=mongodb+srv://your_username:your_password@your_cluster.mongodb.net/hsb_database?retryWrites=true&w=majority
+   MONGODB_URI=your_atlas_connection_string_here
    ```
 6. **Whitelist your IP**:
    - In Atlas, go to "Network Access"
@@ -75,7 +75,7 @@ docker run -d -p 27017:27017 --name mongodb mongo:latest
 
 2. **You should see**:
    ```
-   ✅ MongoDB Connected: localhost:27017
+   ✅ MongoDB Connected: [your connection]
    📊 Database: hsb_database
    Server is running on port 5000
    ```
@@ -95,9 +95,16 @@ To test if your setup is working:
 ## 🐛 Troubleshooting
 
 - **Connection timeout**: Check your internet connection and Atlas IP whitelist
-- **Authentication failed**: Double-check your username/password in the connection string
+- **Authentication failed**: Double-check your credentials in the connection string
 - **Local MongoDB not starting**: Make sure no other process is using port 27017
 - **Still having issues**: The backend will continue running without database connection in development mode, but features won't work properly
+
+## 🔒 Security Notes
+
+- **Never commit .env files** to version control
+- **Use strong passwords** for MongoDB Atlas
+- **Rotate credentials** regularly
+- **Use IP whitelisting** in production
 
 ## 📞 Need Help?
 
