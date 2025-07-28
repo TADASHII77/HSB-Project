@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/database.js';
 import technicianRoutes from './routes/technicians.js';
 import adminRoutes from './routes/admin.js';
+import jobRoutes from './routes/jobs.js';
 
 // Load environment variables
 dotenv.config();
@@ -27,7 +28,7 @@ const limiter = rateLimit({
 app.use(helmet()); // Security headers
 app.use(limiter); // Rate limiting
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: ['http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:5000'],
   credentials: true
 })); // Enable CORS
 app.use(express.json({ limit: '10mb' })); // Parse JSON bodies
@@ -36,6 +37,7 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 // Routes
 app.use('/api/technicians', technicianRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/jobs', jobRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

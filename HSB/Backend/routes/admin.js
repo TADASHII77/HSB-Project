@@ -1,5 +1,7 @@
 import express from 'express';
 import Technician from '../models/Technician.js';
+import User from '../models/User.js';
+import Job from '../models/Job.js';
 
 const router = express.Router();
 
@@ -265,21 +267,45 @@ router.get('/analytics/overview', async (req, res) => {
   }
 });
 
-// User management (placeholder - would integrate with actual user system)
+// User management - fetch from MongoDB
 router.get('/users', async (req, res) => {
   try {
-    // Mock user data - in a real app, this would come from a User model
-    const users = [
-      { id: 1, name: 'John Smith', email: 'john@example.com', role: 'Customer', joinDate: '2024-01-15', status: 'Active', lastActive: '2 hours ago' },
-      { id: 2, name: 'Sarah Johnson', email: 'sarah@hvac.com', role: 'Technician', joinDate: '2024-01-10', status: 'Active', lastActive: '1 day ago' },
-      { id: 3, name: 'Mike Wilson', email: 'mike@example.com', role: 'Customer', joinDate: '2024-01-08', status: 'Inactive', lastActive: '1 week ago' },
-      { id: 4, name: 'Admin User', email: 'admin@hsb.com', role: 'Admin', joinDate: '2023-12-01', status: 'Active', lastActive: 'Online now' },
-      { id: 5, name: 'Lisa Brown', email: 'lisa@example.com', role: 'Customer', joinDate: '2024-01-20', status: 'Active', lastActive: '3 hours ago' }
-    ];
+    const { page = 1, limit = 10, role, status, search } = req.query;
+
+    const filter = {};
+    if (role && role !== 'all') filter.role = role;
+    if (status && status !== 'all') filter.status = status;
+    if (search) {
+      filter.$or = [
+        { name: new RegExp(search, 'i') },
+        { email: new RegExp(search, 'i') }
+      ];
+    }
+
+    const users = await User.find(filter)
+      .select('-businessInfo.businessNumber -businessInfo.licenseNumber') // Hide sensitive info
+      .sort({ createdAt: -1 })
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+
+    const total = await User.countDocuments(filter);
+
+    // Format dates for frontend
+    const formattedUsers = users.map(user => ({
+      ...user.toObject(),
+      joinDate: user.joinDate?.toISOString().split('T')[0] || 'N/A',
+      lastActive: user.lastActive ? getTimeAgo(user.lastActive) : 'Never'
+    }));
 
     res.json({
       success: true,
-      data: users
+      data: formattedUsers,
+      pagination: {
+        currentPage: parseInt(page),
+        totalPages: Math.ceil(total / limit),
+        totalUsers: total
+      }
     });
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -290,6 +316,110 @@ router.get('/users', async (req, res) => {
     });
   }
 });
+
+// Create new user
+router.post('/users', async (req, res) => {
+  try {
+    const userData = req.body;
+    
+    // Check if user already exists
+    const existingUser = await User.findOne({ email: userData.email });
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: 'User with this email already exists'
+      });
+    }
+
+    const newUser = new User(userData);
+    const savedUser = await newUser.save();
+
+    res.status(201).json({
+      success: true,
+      message: 'User created successfully',
+      data: savedUser
+    });
+  } catch (error) {
+    console.error('Error creating user:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error creating user',
+      error: error.message
+    });
+  }
+});
+
+// Update user
+router.put('/users/:id', async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body, lastActive: new Date() },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'User updated successfully',
+      data: updatedUser
+    });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error updating user',
+      error: error.message
+    });
+  }
+});
+
+// Delete user
+router.delete('/users/:id', async (req, res) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+
+    if (!deletedUser) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'User deleted successfully'
+    });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error deleting user',
+      error: error.message
+    });
+  }
+});
+
+// Helper function to format time ago
+function getTimeAgo(date) {
+  const now = new Date();
+  const diffMs = now - date;
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMs / 3600000);
+  const diffDays = Math.floor(diffMs / 86400000);
+
+  if (diffMins < 1) return 'Just now';
+  if (diffMins < 60) return `${diffMins} minutes ago`;
+  if (diffHours < 24) return `${diffHours} hours ago`;
+  if (diffDays < 7) return `${diffDays} days ago`;
+  return date.toISOString().split('T')[0];
+}
 
 // Bulk operations
 router.post('/technicians/bulk-verify', async (req, res) => {

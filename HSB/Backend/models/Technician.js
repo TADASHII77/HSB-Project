@@ -96,6 +96,13 @@ const technicianSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  logo: {
+    type: String, // Base64 encoded image or URL
+    default: null
+  },
+  workPhotos: [{
+    type: String // Array of Base64 encoded images or URLs
+  }],
   reviewsData: [reviewSchema]
 }, {
   timestamps: true
