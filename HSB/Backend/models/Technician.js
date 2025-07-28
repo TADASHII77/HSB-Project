@@ -83,7 +83,7 @@ const technicianSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
+    required: false, // Make optional for backward compatibility
     lowercase: true,
     trim: true
   },

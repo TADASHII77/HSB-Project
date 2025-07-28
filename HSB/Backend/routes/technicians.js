@@ -187,13 +187,20 @@ router.post('/', async (req, res) => {
 // Request quote from technician
 router.post('/:id/quote', async (req, res) => {
   try {
+    console.log('Quote request received:', {
+      technicianId: req.params.id,
+      body: req.body
+    });
+
     const { customerName, customerEmail } = req.body;
     
     // Validate required fields
     if (!customerName || !customerEmail) {
+      console.log('Validation failed:', { customerName, customerEmail });
       return res.status(400).json({
         success: false,
-        message: 'Customer name and email are required'
+        message: 'Customer name and email are required',
+        received: { customerName, customerEmail }
       });
     }
 
@@ -201,9 +208,23 @@ router.post('/:id/quote', async (req, res) => {
     const technician = await Technician.findOne({ technicianId: req.params.id });
     
     if (!technician) {
+      console.log('Technician not found:', req.params.id);
       return res.status(404).json({
         success: false,
-        message: 'Technician not found'
+        message: 'Technician not found',
+        technicianId: req.params.id
+      });
+    }
+
+    console.log('Found technician:', { id: technician.technicianId, name: technician.name, email: technician.email });
+
+    // Check if technician has email
+    if (!technician.email) {
+      console.log('Technician missing email:', technician.technicianId);
+      return res.status(400).json({
+        success: false,
+        message: 'Technician email not configured',
+        technicianId: technician.technicianId
       });
     }
 
@@ -216,6 +237,7 @@ router.post('/:id/quote', async (req, res) => {
     );
 
     if (emailResult.success) {
+      console.log('Quote request processed successfully');
       res.json({
         success: true,
         message: 'Quote request sent successfully',
@@ -233,6 +255,7 @@ router.post('/:id/quote', async (req, res) => {
         }
       });
     } else {
+      console.log('Email sending failed:', emailResult.error);
       res.status(500).json({
         success: false,
         message: 'Failed to send quote request emails',
