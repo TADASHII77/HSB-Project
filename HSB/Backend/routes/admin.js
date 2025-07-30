@@ -322,17 +322,51 @@ router.post('/users', async (req, res) => {
   try {
     const userData = req.body;
     
+    // Add detailed logging
+    console.log('🔍 POST /admin/users - Received user data:');
+    console.log('📋 Full userData:', JSON.stringify(userData, null, 2));
+    console.log('📧 Email:', userData.email);
+    console.log('👤 Name:', userData.name);
+    console.log('📱 Phone:', userData.phone);
+    console.log('🏷️ Role:', userData.role);
+    
+    // Validate required fields manually first
+    if (!userData.name) {
+      console.log('❌ Missing required field: name');
+      return res.status(400).json({
+        success: false,
+        message: 'Name is required'
+      });
+    }
+    
+    if (!userData.email) {
+      console.log('❌ Missing required field: email');
+      return res.status(400).json({
+        success: false,
+        message: 'Email is required'
+      });
+    }
+    
+    console.log('✅ Required fields validation passed');
+    
     // Check if user already exists
+    console.log('🔍 Checking if user exists with email:', userData.email);
     const existingUser = await User.findOne({ email: userData.email });
     if (existingUser) {
+      console.log('❌ User already exists:', existingUser._id);
       return res.status(400).json({
         success: false,
         message: 'User with this email already exists'
       });
     }
+    
+    console.log('✅ No existing user found, creating new user...');
 
     const newUser = new User(userData);
+    console.log('📝 User instance created, attempting to save...');
+    
     const savedUser = await newUser.save();
+    console.log('✅ User saved successfully:', savedUser._id);
 
     res.status(201).json({
       success: true,
@@ -340,7 +374,28 @@ router.post('/users', async (req, res) => {
       data: savedUser
     });
   } catch (error) {
-    console.error('Error creating user:', error);
+    console.error('❌ Error creating user:', error);
+    console.error('❌ Error details:', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack
+    });
+    
+    // Check for validation errors
+    if (error.name === 'ValidationError') {
+      console.error('❌ Validation errors:', error.errors);
+      const validationErrors = Object.keys(error.errors).map(key => ({
+        field: key,
+        message: error.errors[key].message
+      }));
+      
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: validationErrors
+      });
+    }
+    
     res.status(500).json({
       success: false,
       message: 'Error creating user',

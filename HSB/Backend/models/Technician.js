@@ -33,6 +33,52 @@ const reviewSchema = new mongoose.Schema({
   }
 });
 
+// Business hours schema for each day
+const businessHoursSchema = new mongoose.Schema({
+  start: {
+    type: String,
+    default: '9:00 AM'
+  },
+  end: {
+    type: String,
+    default: '5:00 PM'
+  },
+  closed: {
+    type: Boolean,
+    default: false
+  }
+}, { _id: false });
+
+// Service radius schema
+const serviceRadiusSchema = new mongoose.Schema({
+  city: {
+    type: String,
+    default: ''
+  },
+  distance: {
+    type: String,
+    default: '10 km'
+  }
+}, { _id: false });
+
+// Owner/Personal details schema
+const ownerDetailsSchema = new mongoose.Schema({
+  firstName: String,
+  lastName: String,
+  personalPhone: String,
+  personalEmail: String
+}, { _id: false });
+
+// Address details schema
+const addressDetailsSchema = new mongoose.Schema({
+  businessAddress: String,
+  streetAddress: String,
+  city: String,
+  province: String,
+  country: String,
+  postalCode: String
+}, { _id: false });
+
 const technicianSchema = new mongoose.Schema({
   technicianId: {
     type: Number,
@@ -45,9 +91,10 @@ const technicianSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    required: true,
+    required: false,
     min: 0,
-    max: 5
+    max: 5,
+    default: 0
   },
   reviews: {
     type: Number,
@@ -55,7 +102,7 @@ const technicianSchema = new mongoose.Schema({
   },
   services: [{
     type: String,
-    required: true
+    required: false
   }],
   verified: {
     type: Boolean,
@@ -67,23 +114,25 @@ const technicianSchema = new mongoose.Schema({
   },
   distance: {
     type: Number,
-    required: true
+    required: false,
+    default: 0
   },
   category: {
     type: String,
-    required: true
+    required: false,
+    default: 'General'
   },
   address: {
     type: String,
-    required: true
+    required: false
   },
   phone: {
     type: String,
-    required: true
+    required: false
   },
   email: {
     type: String,
-    required: false, // Make optional for backward compatibility
+    required: false,
     lowercase: true,
     trim: true
   },
@@ -92,15 +141,18 @@ const technicianSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true
+    required: false,
+    default: ''
   },
   serviceAreas: {
     type: String,
-    required: true
+    required: false,
+    default: ''
   },
   expertise: {
     type: String,
-    required: true
+    required: false,
+    default: ''
   },
   logo: {
     type: String, // Base64 encoded image or URL
@@ -109,7 +161,62 @@ const technicianSchema = new mongoose.Schema({
   workPhotos: [{
     type: String // Array of Base64 encoded images or URLs
   }],
-  reviewsData: [reviewSchema]
+  reviewsData: [reviewSchema],
+
+  // New fields from BusinessPosting form
+  ownerDetails: ownerDetailsSchema,
+  
+  addressDetails: addressDetailsSchema,
+  
+  businessPhone: String,
+  businessEmail: String,
+  
+  businessWebsite: String,
+  businessDescription: String,
+  
+  // Business hours for each day of the week
+  businessHours: {
+    monday: businessHoursSchema,
+    tuesday: businessHoursSchema,
+    wednesday: businessHoursSchema,
+    thursday: businessHoursSchema,
+    friday: businessHoursSchema,
+    saturday: businessHoursSchema,
+    sunday: businessHoursSchema
+  },
+  
+  // Service radius
+  serviceRadius: serviceRadiusSchema,
+  
+  // Insurance/warranty info
+  providesInsurance: {
+    type: String,
+    enum: ['yes', 'no', ''],
+    default: ''
+  },
+  insuranceNumber: String,
+  
+  // Payment methods
+  acceptedPayments: [{
+    type: String,
+    enum: ['Cash', 'Debit Card', 'Credit Card', 'Financing']
+  }],
+  
+  // Google Maps integration
+  googleMapsLink: String,
+  
+  // Application status
+  applicationStatus: {
+    type: String,
+    enum: ['pending', 'approved', 'rejected', 'under_review'],
+    default: 'pending'
+  },
+  
+  // Profile completion status
+  profileComplete: {
+    type: Boolean,
+    default: false
+  }
 }, {
   timestamps: true
 });

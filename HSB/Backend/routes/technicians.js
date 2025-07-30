@@ -167,15 +167,40 @@ router.post('/filter', async (req, res) => {
 // Create new technician (for admin use)
 router.post('/', async (req, res) => {
   try {
+    console.log('🔧 POST /technicians - Received technician data:');
+    console.log('📋 Technician ID:', req.body.technicianId);
+    console.log('🏢 Business Name:', req.body.name);
+    console.log('📧 Business Email:', req.body.businessEmail);
+    console.log('📱 Business Phone:', req.body.businessPhone);
+    console.log('👤 Owner Details:', req.body.ownerDetails);
+    console.log('🏠 Address Details:', req.body.addressDetails);
+    console.log('⏰ Business Hours:', req.body.businessHours ? 'Present' : 'Missing');
+    console.log('💰 Payment Methods:', req.body.acceptedPayments);
+    console.log('📄 Application Status:', req.body.applicationStatus);
+    
     const technician = new Technician(req.body);
+    console.log('🔨 Attempting to save technician...');
+    
     const savedTechnician = await technician.save();
+    console.log('✅ Technician saved successfully:', savedTechnician.technicianId);
     
     res.status(201).json({
       success: true,
       data: savedTechnician
     });
   } catch (error) {
-    console.error('Error creating technician:', error);
+    console.error('❌ Error creating technician:', error);
+    console.error('❌ Error details:', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack
+    });
+    
+    // Check for validation errors
+    if (error.name === 'ValidationError') {
+      console.error('❌ Technician validation errors:', error.errors);
+    }
+    
     res.status(400).json({
       success: false,
       message: 'Error creating technician',
@@ -267,6 +292,58 @@ router.post('/:id/quote', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Server Error',
+      error: error.message
+    });
+  }
+});
+
+// Update technician profile (for business dashboard)
+router.put('/:id', async (req, res) => {
+  try {
+    console.log('🔧 PUT /technicians/:id - Updating technician profile');
+    console.log('📋 Technician ID:', req.params.id);
+    console.log('📝 Update data keys:', Object.keys(req.body));
+    
+    const updatedTechnician = await Technician.findOneAndUpdate(
+      { technicianId: req.params.id },
+      { ...req.body, updatedAt: new Date() },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedTechnician) {
+      console.log('❌ Technician not found');
+      return res.status(404).json({
+        success: false,
+        message: 'Technician not found'
+      });
+    }
+
+    console.log('✅ Technician updated successfully');
+    res.json({
+      success: true,
+      message: 'Profile updated successfully',
+      data: updatedTechnician
+    });
+  } catch (error) {
+    console.error('❌ Error updating technician:', error);
+    
+    // Handle validation errors
+    if (error.name === 'ValidationError') {
+      const validationErrors = Object.keys(error.errors).map(key => ({
+        field: key,
+        message: error.errors[key].message
+      }));
+      
+      return res.status(400).json({
+        success: false,
+        message: 'Validation failed',
+        errors: validationErrors
+      });
+    }
+    
+    res.status(500).json({
+      success: false,
+      message: 'Error updating profile',
       error: error.message
     });
   }
